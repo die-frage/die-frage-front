@@ -43,11 +43,13 @@ label {
   margin-bottom: 5px;
 }
 
-input {
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #5E85C2;
+  border: 1px solid #CCCCCC;
   border-radius: 5px;
 }
 
@@ -66,4 +68,14 @@ input {
 .bottom-block {
   text-align: center;
   margin-top: 10px;
+}
+
+.register-button[type="submit"]:hover {
+  background-color: #4675B9;
+}
+
+.error-message {
+  color: #DF6767;
+  font-size: 14px;
+  margin-top: 5px;
 }
