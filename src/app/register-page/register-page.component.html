@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="register-page.component.css">
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    Сервис для проведения интерактивных опросов во время лекции
+  </div>
+</header>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="container">
+  <div class="form-container">
+      <div class="left-column">
+        <h2>Регистрация</h2>
+        <label for="fullname">ФИО:</label>
+        <input type="text" formControlName="fullname" id="fullname">
+        <label for="email">Почта:</label>
+        <input type="email" formControlName="email" id="email">
+      </div>
+        <div class="right-column">
+          <label for="password">Пароль:</label>
+          <input type="password" formControlName="password" id="password">
+          <label for="confirmPassword">Повторите пароль:</label>
+          <input type="password" formControlName="confirmPassword" id="confirmPassword">
+          <button class="register-button" type="submit">Зарегистрироваться</button>
+          <p>Уже есть аккаунт?</p>
+          <p><a href="#">Войти</a></p>
+      </div>
+  </div>
+</form>
+
+<div class="bottom-block">
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+  <div *ngIf="formControls['fullname'].invalid && (formControls['fullname'].dirty || formControls['fullname'].touched)">
+    <div *ngIf="formControls['fullname'].errors?.['required']" class="error-message">ФИО не может быть пустым</div>
+  </div>
+
+  <div *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)">
+    <div *ngIf="formControls['email'].errors?.['required']" class="error-message">Почта не может быть пустой</div>
+    <div *ngIf="formControls['email'].errors?.['email']" class="error-message">Неверный формат почты</div>
+  </div>
+
+  <div *ngIf="formControls['password'].invalid && (formControls['password'].dirty || formControls['password'].touched)">
+    <div *ngIf="formControls['password'].errors?.['required']" class="error-message">Пароль не может быть пустым</div>
+    <div *ngIf="formControls['password'].errors?.['pattern']" class="error-message">Пароль должен содержать хотя бы 1 заглавную букву и 1 строчную букву, 2 цифры, 1 спец символ, длина пароля не меньше 8 символов</div>
+  </div>
+
+  <div *ngIf="formControls['confirmPassword'].invalid && (formControls['confirmPassword'].dirty || formControls['confirmPassword'].touched)">
+    <div *ngIf="formControls['confirmPassword'].errors?.['passwordMismatch']" class="error-message">Пароли не совпадают</div>
+  </div>
+
+</div>
+
+</body>
+</html>
