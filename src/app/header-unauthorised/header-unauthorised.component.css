@@ -1,0 +1,14 @@
+.header {
+  background-color: #5E85C2;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.header-content {
+  color: #F8F8F8;
+  font-size: 22px;
+}
+
+.header:hover {
+  background-color: #1850b7;
+}
