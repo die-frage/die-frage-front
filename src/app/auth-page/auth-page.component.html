@@ -1,0 +1,45 @@
+<div class="container">
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="right-column">
+    <div class="form-container">
+      <label for="email">Логин:</label>
+      <input type="email" formControlName="email" id="email">
+      <label for="password">Пароль:</label>
+      <input type="password" formControlName="password" id="password">
+      <button class="login-button" type="submit">Войти</button>
+      <p>Еще нет аккаунта?</p>
+      <p><a href="#">Зарегистрироваться</a></p>
+    </div>
+    <div class="bottom-block">
+      <div *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)">
+        <div *ngIf="formControls['email'].errors?.['required']" class="error-message">Логин не может быть пустым</div>
+        <div *ngIf="formControls['email'].errors?.['email']" class="error-message">Неверный формат почты</div>
+      </div>
+      <div *ngIf="formControls['password'].invalid && (formControls['password'].dirty || formControls['password'].touched)">
+        <div *ngIf="formControls['password'].errors?.['required']" class="error-message">Пароль не может быть пустым</div>
+        <div *ngIf="formControls['password'].errors?.['pattern']" class="error-message">Пароль должен содержать хотя бы 1 заглавную букву и 1 строчную букву, 2 цифры, 1 спец символ, длина пароля не меньше 8 символов</div>
+      </div>
+    </div>
+  </form>
+
+  <div class="left-column">
+    <div class="block_hor">
+      <img src="assets/pictures/icons/completed-task.png" alt="Telegram" width="80" height="80">
+      <p class="description">Создавайте опрос с использованием телеграмм-бота, а также получения статистика и отчетов в нужном формате прямо во время лекции!</p>
+    </div>
+    <div class="block_hor">
+      <img src="assets/pictures/icons/telegram.png" alt="Telegram" width="80" height="80">
+      <p class="description">Опросы прямо в телеграмме</p>
+    </div>
+    <div class="block_ver">
+      <div class="sub-block">
+        <img src="assets/pictures/icons/word.png" class="img-row" alt="Image 1" width="80" height="80">
+        <img src="assets/pictures/icons/excel.png" class="img-row" alt="Image 2" width="80" height="80">
+        <img src="assets/pictures/icons/pdf.png" class="img-row" alt="Image 3" width="80" height="80">
+      </div>
+      <p class="description">Сохраняйте результаты в удобном Вам формате</p>
+    </div>
+  </div>
+
+
+</div>

@@ -5,12 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderUnauthorisedComponent } from './header-unauthorised/header-unauthorised.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { AuthPageComponent } from './auth-page/auth-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderUnauthorisedComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    AuthPageComponent
   ],
   imports: [
     BrowserModule,
