@@ -8,7 +8,7 @@
       <input type="password" formControlName="password" id="password">
       <button class="login-button" type="submit">Войти</button>
       <p>Еще нет аккаунта?</p>
-      <p><a href="#">Зарегистрироваться</a></p>
+      <p><a [routerLink]="['/registration']">Зарегистрироваться</a></p>
     </div>
     <div class="bottom-block">
       <div *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)">

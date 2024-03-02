@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderUnauthorisedComponent } from './header-unauthorised/header-unauthorised.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
+import {provideRouter, RouterModule} from "@angular/router";
+import routeConfig from "./routes";
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([])
   ],
-  providers: [],
+  providers: [provideRouter(routeConfig)],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
