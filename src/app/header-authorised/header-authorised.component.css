@@ -1,0 +1,29 @@
+.header {
+  background-color: #5E85C2;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.header-content {
+  color: #F8F8F8;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header:hover {
+  background-color: #1850b7;
+}
+
+.left-img {
+  margin-right: 100px;
+  padding: 5px;
+}
+
+.right-img {
+  margin-left: 100px;
+  padding: 5px;
+}
+
+
