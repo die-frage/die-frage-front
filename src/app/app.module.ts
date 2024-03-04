@@ -8,13 +8,15 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import {provideRouter, RouterModule} from "@angular/router";
 import routeConfig from "./routes";
+import { HeaderAuthorisedComponent } from './header-authorised/header-authorised.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderUnauthorisedComponent,
     RegisterPageComponent,
-    AuthPageComponent
+    AuthPageComponent,
+    HeaderAuthorisedComponent
   ],
   imports: [
     BrowserModule,
