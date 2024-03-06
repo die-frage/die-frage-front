@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AuthService} from "../auth/auth.service";
+import {TokenStorageService} from "../auth/token-storage.service";
+import {SignInInfo} from "../auth/responces/SignInInfo";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth-page',
@@ -9,25 +13,46 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AuthPageComponent {
   loginForm: FormGroup;
   submitted = false;
+  fromBackError = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor (private formBuilder: FormBuilder,
+               private authService: AuthService,
+               private tokenStorage: TokenStorageService,
+               private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
-  get formControls() { return this.loginForm.controls; }
+  get formControls() {
+    return this.loginForm.controls;
+  }
 
-  onSubmit() {
+  onSubmit(){
     this.submitted = true;
 
     if (this.loginForm.invalid) {
       return;
     }
 
-    if (this.loginForm.value.password !== this.loginForm.value.confirmPassword) {
-      return;
-    }
+    const loginInInfo = new SignInInfo(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value);
+    this.authService.signIn(loginInInfo).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveEmail(loginInInfo.email);
+        this.router.navigate(['']);
+      },
+      error => {
+        if (error.status === 404 || error.status === 403) {
+          this.fromBackError = true;
+        }
+      }
+    )
   }
+
+  onEmailOrPasswordInputClicked() {
+    this.fromBackError = false;
+  }
+
 }

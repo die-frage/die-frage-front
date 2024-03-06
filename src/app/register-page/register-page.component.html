@@ -5,7 +5,7 @@
         <label for="fullname">ФИО:</label>
         <input type="text" formControlName="fullname" id="fullname">
         <label for="email">Почта:</label>
-        <input type="email" formControlName="email" id="email">
+        <input type="email" formControlName="email" id="email" (click)="onEmailInputClicked()">
       </div>
         <div class="right-column">
           <label for="password">Пароль:</label>
@@ -14,14 +14,12 @@
           <input type="password" formControlName="confirmPassword" id="confirmPassword">
           <button class="register-button" type="submit">Зарегистрироваться</button>
           <p>Уже есть аккаунт?</p>
-          <p><a [routerLink]="['']">Войти</a></p>
+          <p><a [routerLink]="['/sign-in']">Войти</a></p>
       </div>
   </div>
 </form>
 
 <div class="bottom-block">
-  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-
   <div *ngIf="formControls['fullname'].invalid && (formControls['fullname'].dirty || formControls['fullname'].touched)">
     <div *ngIf="formControls['fullname'].errors?.['required']" class="error-message">ФИО не может быть пустым</div>
   </div>
@@ -36,8 +34,12 @@
     <div *ngIf="formControls['password'].errors?.['pattern']" class="error-message">Пароль должен содержать хотя бы 1 заглавную букву и 1 строчную букву, 2 цифры, 1 спец символ, длина пароля не меньше 8 символов</div>
   </div>
 
-  <div *ngIf="formControls['confirmPassword'].invalid && (formControls['confirmPassword'].dirty || formControls['confirmPassword'].touched)">
-    <div *ngIf="formControls['confirmPassword'].errors?.['passwordMismatch']" class="error-message">Пароли не совпадают</div>
+  <div *ngIf="formControls['confirmPassword'].invalid && formControls['confirmPassword'].errors?.['passwordMismatch'] && (formControls['confirmPassword'].dirty || formControls['confirmPassword'].touched)">
+    <div class="error-message">Пароли не совпадают</div>
+  </div>
+
+  <div *ngIf="fromBackError">
+    <div class="error-message">Пользователь с таким email уже зарегестрирован</div>
   </div>
 
 </div>
