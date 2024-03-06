@@ -3,12 +3,12 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="right-column">
     <div class="form-container">
       <label for="email">Логин:</label>
-      <input type="email" formControlName="email" id="email">
+      <input type="email" formControlName="email" id="email" (click)="onEmailOrPasswordInputClicked">
       <label for="password">Пароль:</label>
-      <input type="password" formControlName="password" id="password">
+      <input type="password" formControlName="password" id="password" (click)="onEmailOrPasswordInputClicked">
       <button class="login-button" type="submit">Войти</button>
       <p>Еще нет аккаунта?</p>
-      <p><a [routerLink]="['/registration']">Зарегистрироваться</a></p>
+      <p><a [routerLink]="['/sign-up']">Зарегистрироваться</a></p>
     </div>
     <div class="bottom-block">
       <div *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)">
@@ -17,8 +17,9 @@
       </div>
       <div *ngIf="formControls['password'].invalid && (formControls['password'].dirty || formControls['password'].touched)">
         <div *ngIf="formControls['password'].errors?.['required']" class="error-message">Пароль не может быть пустым</div>
-        <div *ngIf="formControls['password'].errors?.['pattern']" class="error-message">Пароль должен содержать хотя бы 1 заглавную букву и 1 строчную букву, 2 цифры, 1 спец символ, длина пароля не меньше 8 символов</div>
+        <div *ngIf="formControls['password'].errors?.['pattern']" class="error-message">Длина пароля не меньше 8 символов</div>
       </div>
+      <div *ngIf="fromBackError" class="error-message">Неверный логин или пароль</div>
     </div>
   </form>
 
@@ -40,6 +41,5 @@
       <p class="description">Сохраняйте результаты в удобном Вам формате</p>
     </div>
   </div>
-
 
 </div>
