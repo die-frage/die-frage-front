@@ -19,6 +19,8 @@ export class RegisterPageComponent {
               private authService: AuthService,
               private tokenStorage: TokenStorageService,
               private router: Router) {
+
+    this.tokenStorage.signOut();
     this.registerForm = this.formBuilder.group({
       fullname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -58,10 +60,6 @@ export class RegisterPageComponent {
     if (fio.length > 2 && fio[2] !== null) {
       patronomic = fio[2];
     }
-
-    console.log('\'' + lastName + '\'');
-    console.log('\'' + firstName + '\'');
-    console.log('\'' + patronomic + '\'');
 
     const signUpInfo = new SignUpInfo(
       this.registerForm.get('email')?.value,

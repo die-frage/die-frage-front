@@ -12,7 +12,6 @@ import {NavigationExtras, Router} from "@angular/router";
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-
   info: any;
   user: User | undefined;
   surveys: Survey[] | undefined;

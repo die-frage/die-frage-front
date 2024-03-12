@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header-authorised',
@@ -7,14 +8,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderAuthorisedComponent {
 
+  constructor(private router: Router) {}
 
   toUserPage(){
-
+    this.router.navigate(['/user-page']);
   }
 
-  toSurveysPage(){
-
+  toHomePage(){
+    this.router.navigate(['']);
   }
-
 
 }

@@ -29,6 +29,5 @@ export class TokenStorageService {
     return <string>sessionStorage.getItem(EMAIL_KEY);
   }
 
-  constructor() {
-  }
+  constructor() {}
 }

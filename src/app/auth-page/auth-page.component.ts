@@ -19,6 +19,7 @@ export class AuthPageComponent {
                private authService: AuthService,
                private tokenStorage: TokenStorageService,
                private router: Router) {
+    this.tokenStorage.signOut();
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
