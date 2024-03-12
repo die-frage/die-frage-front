@@ -18,28 +18,28 @@ import { AddSurveyPageComponent } from './add-survey-page/add-survey-page.compon
 import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderUnauthorisedComponent,
-    RegisterPageComponent,
-    AuthPageComponent,
-    HeaderAuthorisedComponent,
-    HomePageComponent,
-    EditSurveyPageComponent,
-    AddSurveyPageComponent,
-    UserPageComponent
-  ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot([])
-  ],
-  providers: [
-    httpInterceptorProviders,
-    provideRouter(routeConfig)
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderUnauthorisedComponent,
+        RegisterPageComponent,
+        AuthPageComponent,
+        HeaderAuthorisedComponent,
+        HomePageComponent,
+        EditSurveyPageComponent,
+        AddSurveyPageComponent,
+        UserPageComponent
+    ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule.forRoot([])
+    ],
+    providers: [
+        httpInterceptorProviders,
+        provideRouter(routeConfig)
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

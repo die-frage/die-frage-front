@@ -2,20 +2,21 @@ import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-header-authorised',
-  templateUrl: './header-authorised.component.html',
-  styleUrls: ['./header-authorised.component.css']
+    selector: 'app-header-authorised',
+    templateUrl: './header-authorised.component.html',
+    styleUrls: ['./header-authorised.component.css']
 })
 export class HeaderAuthorisedComponent {
 
-  constructor(private router: Router) {}
+    constructor(private router: Router) {
+    }
 
-  toUserPage(){
-    this.router.navigate(['/user-page']);
-  }
+    toUserPage() {
+        this.router.navigate(['/user-page']);
+    }
 
-  toHomePage(){
-    this.router.navigate(['']);
-  }
+    toHomePage() {
+        this.router.navigate(['']);
+    }
 
 }

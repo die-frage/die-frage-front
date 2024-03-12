@@ -2,22 +2,21 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Survey} from "../entities/survey";
 import {Observable} from "rxjs";
-import {User} from "../entities/user";
 
 const httpOptions = {
-  headers: new HttpHeaders({'Accept': 'application/json'})
+    headers: new HttpHeaders({'Accept': 'application/json'})
 }
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SurveyService {
-  private baseUrl = 'http://localhost:8080/api/survey';
+    private baseUrl = 'http://localhost:8080/api/survey';
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  getAllSurveysByProfessorId(professorId: number): Observable<Survey[]> {
-    return this.http.get<Survey[]>(`${this.baseUrl}/${professorId}/all`, httpOptions);
-  }
+    getAllSurveysByProfessorId(professorId: number): Observable<Survey[]> {
+        return this.http.get<Survey[]>(`${this.baseUrl}/${professorId}/all`, httpOptions);
+    }
 }

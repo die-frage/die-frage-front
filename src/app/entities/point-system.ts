@@ -1,4 +1,4 @@
 export interface PointSystem {
-  point: number;
-  mark: number;
+    point: number;
+    mark: number;
 }

@@ -8,40 +8,40 @@ import {AddSurveyPageComponent} from "./add-survey-page/add-survey-page.componen
 import {UserPageComponent} from "./user-page/user-page.component";
 
 const routeConfig: Routes = [
-  {
-    path: 'sign-in',
-    component: AuthPageComponent,
-    title: 'Die Frage'
-  },
-  {
-    path: 'sign-up',
-    component: RegisterPageComponent,
-    title: 'Die Frage'
-  },
-  {
-    path: '',
-    component: HomePageComponent,
-    canActivate: [authGuard],
-    title: 'Die Frage'
-  },
-  {
-    path: 'edit-survey',
-    component: EditSurveyPageComponent,
-    canActivate: [authGuard],
-    title: 'Die Frage'
-  },
-  {
-    path: 'add-survey',
-    component: AddSurveyPageComponent,
-    canActivate: [authGuard],
-    title: 'Die Frage'
-  },
-  {
-    path: 'user-page',
-    component: UserPageComponent,
-    canActivate: [authGuard],
-    title: 'Die Frage'
-  }
+    {
+        path: 'sign-in',
+        component: AuthPageComponent,
+        title: 'Die Frage'
+    },
+    {
+        path: 'sign-up',
+        component: RegisterPageComponent,
+        title: 'Die Frage'
+    },
+    {
+        path: '',
+        component: HomePageComponent,
+        canActivate: [authGuard],
+        title: 'Die Frage'
+    },
+    {
+        path: 'edit-survey',
+        component: EditSurveyPageComponent,
+        canActivate: [authGuard],
+        title: 'Die Frage'
+    },
+    {
+        path: 'add-survey',
+        component: AddSurveyPageComponent,
+        canActivate: [authGuard],
+        title: 'Die Frage'
+    },
+    {
+        path: 'user-page',
+        component: UserPageComponent,
+        canActivate: [authGuard],
+        title: 'Die Frage'
+    }
 
 ];
 
