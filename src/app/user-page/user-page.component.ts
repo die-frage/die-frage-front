@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {User} from "../entities/user";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {UserService} from "../services/user.service";
-import {SurveyService} from "../services/survey.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth/auth.service";
@@ -67,12 +66,12 @@ export class UserPageComponent {
   onSubmit() {
     if (this.user == undefined) return;
 
-    if (this.updateForm.invalid) {
+    if (this.updateForm.value.password !== this.updateForm.value.confirmPassword) {
+      this.updateForm.controls['confirmPassword'].setErrors({'passwordMismatch': true});
       return;
     }
 
-    if (this.updateForm.value.password !== this.updateForm.value.confirmPassword) {
-      this.updateForm.controls['confirmPassword'].setErrors({'passwordMismatch': true});
+    if (this.updateForm.invalid) {
       return;
     }
 

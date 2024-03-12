@@ -36,12 +36,12 @@ export class RegisterPageComponent {
   onSubmit() {
     this.submitted = true;
 
-    if (this.registerForm.invalid) {
+    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+      this.registerForm.controls['confirmPassword'].setErrors({'passwordMismatch': true});
       return;
     }
 
-    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
-      this.registerForm.controls['confirmPassword'].setErrors({'passwordMismatch': true});
+    if (this.registerForm.invalid) {
       return;
     }
 

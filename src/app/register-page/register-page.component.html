@@ -31,7 +31,7 @@
 
   <div *ngIf="formControls['password'].invalid && (formControls['password'].dirty || formControls['password'].touched)">
     <div *ngIf="formControls['password'].errors?.['required']" class="error-message">Пароль не может быть пустым</div>
-    <div *ngIf="formControls['password'].errors?.['pattern']" class="error-message">Пароль должен содержать хотя бы 1 заглавную букву и 1 строчную букву, 2 цифры, 1 спец символ, длина пароля не меньше 8 символов</div>
+    <div *ngIf="formControls['password'].errors?.['pattern']" class="error-message">Длина пароля не меньше 8 символов</div>
   </div>
 
   <div *ngIf="formControls['confirmPassword'].invalid && formControls['confirmPassword'].errors?.['passwordMismatch'] && (formControls['confirmPassword'].dirty || formControls['confirmPassword'].touched)">
@@ -39,7 +39,6 @@
   </div>
 
   <div *ngIf="fromBackError">
-    <div class="error-message">Пользователь с таким email уже зарегестрирован</div>
+    <div class="error-message">Пользователь с таким email уже зарегистрирован</div>
   </div>
-
 </div>
