@@ -108,3 +108,6 @@
   max-height: 400px;
 }
 
+.item:hover {
+  background-color: #e0e0e0;;
+}

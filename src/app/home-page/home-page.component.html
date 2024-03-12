@@ -16,7 +16,7 @@
     <input id="searchInput" type="text" placeholder="Введите название опроса" (keypress)="handleKeyPress($event)">
   </div>
   <div *ngIf=" surveys && surveys.length > 0; else no_surveys" class="element-cards">
-    <div class="item" *ngFor="let survey of surveys">
+    <div class="item" *ngFor="let survey of surveys" (click)="onClickChangeSurvey(survey)">
       <div class="title">{{ survey.title }}</div>
       <div class="date">Дата начала:</div>
       <div class="time">{{ survey.date_begin | date: 'dd.MM.yy HH:mm'}}</div>

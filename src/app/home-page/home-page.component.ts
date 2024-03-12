@@ -4,6 +4,7 @@ import {Survey} from "../entities/survey";
 import {SurveyService} from "../services/survey.service";
 import {User} from "../entities/user";
 import {UserService} from "../services/user.service";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
   selector: 'app-home-page',
@@ -15,10 +16,13 @@ export class HomePageComponent {
   info: any;
   user: User | undefined;
   surveys: Survey[] | undefined;
+  surveysFilter: Survey[] | undefined;
+  surveysAll: Survey[] | undefined;
 
   constructor(private token: TokenStorageService,
               private userService: UserService,
-              private surveyService: SurveyService) {
+              private surveyService: SurveyService,
+              private router: Router) {
   }
 
   async ngOnInit() {
@@ -27,19 +31,8 @@ export class HomePageComponent {
       token: this.token.getToken()
     };
     this.user = await this.getUserByEmail(this.info.username);
-    if (this.user) this.surveys = await this.getAllSurveys(this.user);
-    console.log(this.surveys);
-  }
-
-  onClickAddSurvey() {
-    console.log("clicked");
-  }
-
-  handleKeyPress(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      const inputValue = (event.target as HTMLInputElement).value;
-      console.log("Entered value:", inputValue);
-    }
+    if (this.user) this.surveysAll = await this.getAllSurveys(this.user);
+    this.surveys = this.surveysAll;
   }
 
   async getAllSurveys(user: User): Promise<Survey[] | undefined> {
@@ -59,6 +52,34 @@ export class HomePageComponent {
       console.log('Error fetching user:', error);
       return undefined;
     }
+  }
+
+  onClickChangeSurvey(survey: Survey) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        survey: survey
+      }
+    };
+    this.router.navigate(['/edit-survey'], navigationExtras);
+  }
+
+  onClickAddSurvey() {
+    this.router.navigate(['/add-survey']);
+  }
+
+  handleKeyPress(event: KeyboardEvent) {
+    this.surveysFilter = [];
+    if (this.surveysAll == undefined) return;
+
+    if (event.key === "Enter") {
+      const inputValue = (event.target as HTMLInputElement).value.toLocaleLowerCase();
+      for (let i = 0; i < this.surveysAll.length; i++ ) {
+        if (this.surveysAll[i].title.toLocaleLowerCase().includes(inputValue)) {
+          this.surveysFilter.push(this.surveysAll[i]);
+        }
+      }
+    }
+    this.surveys = this.surveysFilter;
   }
 
 }

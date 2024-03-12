@@ -13,6 +13,9 @@ import { HttpClientModule} from "@angular/common/http";
 import { provideRouter, RouterModule } from "@angular/router";
 import routeConfig from "./routes";
 import { httpInterceptorProviders } from "./auth/auth-interceptor";
+import { EditSurveyPageComponent } from './edit-survey-page/edit-survey-page.component';
+import { AddSurveyPageComponent } from './add-survey-page/add-survey-page.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
     RegisterPageComponent,
     AuthPageComponent,
     HeaderAuthorisedComponent,
-    HomePageComponent
+    HomePageComponent,
+    EditSurveyPageComponent,
+    AddSurveyPageComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
