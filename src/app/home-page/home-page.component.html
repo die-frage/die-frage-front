@@ -1,7 +1,22 @@
-<div *ngIf="info.token; else notoken">
-<p> Привет, {{info.username}} ! </p>
-</div>
+<!--<div *ngIf="info.token; else notoken">-->
+<!--<p> Привет, {{info.username}} ! </p>-->
+<!--</div>-->
 
-<ng-template #notoken>
-  <p>home-page works!</p>
-</ng-template>
+<!--<ng-template #notoken>-->
+<!--  <p>home-page works!</p>-->
+<!--</ng-template>-->
+
+<div class="container">
+
+  <div class="element-add">
+    <p>Создать новый опрос:</p>
+    <button (click)="onClickAddSurvey()"></button>
+  </div>
+
+  <div class="element-search-box">
+    <img src="assets/pictures/icons/search-interface-symbol.png" alt="Search Icon">
+    <input id="searchInput" type="text" placeholder="Введите название опроса" (keypress)="handleKeyPress($event)">
+  </div>
+
+
+</div>
