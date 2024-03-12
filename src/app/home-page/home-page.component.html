@@ -7,16 +7,23 @@
 <!--</ng-template>-->
 
 <div class="container">
-
   <div class="element-add">
     <p>Создать новый опрос:</p>
     <button (click)="onClickAddSurvey()"></button>
   </div>
-
   <div class="element-search-box">
     <img src="assets/pictures/icons/search-interface-symbol.png" alt="Search Icon">
     <input id="searchInput" type="text" placeholder="Введите название опроса" (keypress)="handleKeyPress($event)">
   </div>
-
-
+  <div *ngIf=" surveys && surveys.length > 0; else no_surveys" class="element-cards">
+    <div class="item" *ngFor="let survey of surveys">
+      <div class="title">{{ survey.title }}</div>
+      <div class="date">Дата начала: {{ survey.date_begin }}</div>
+      <div class="date">Дата окончания: {{ survey.date_end }}</div>
+      <div class="participants">{{ survey.max_students }} участников</div>
+    </div>
+  </div>
+  <ng-template #no_surveys>
+    <img class="no-elements" src="assets/pictures/icons/no-connection.png">
+  </ng-template>
 </div>

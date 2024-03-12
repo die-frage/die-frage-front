@@ -6,7 +6,8 @@ const EMAIL_KEY = "EMAIL_KEY";
 @Injectable({
   providedIn: 'root'
 })
-export class TokenStorageService {signOut() {
+export class TokenStorageService {
+  signOut() {
     window.sessionStorage.clear();
   }
 
@@ -28,5 +29,6 @@ export class TokenStorageService {signOut() {
     return <string>sessionStorage.getItem(EMAIL_KEY);
   }
 
-  constructor() {}
+  constructor() {
+  }
 }

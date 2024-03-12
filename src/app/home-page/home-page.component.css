@@ -31,6 +31,7 @@
   background-repeat: no-repeat;
 }
 
+
 .element-search-box {
   max-width: 1000px; /* Максимальная ширина поискового поля */
   width: 100%; /* Ширина будет масштабироваться в зависимости от контейнера */
@@ -62,3 +63,43 @@
   color: #7B7B7B;
   font-size: 18px;
 }
+
+.element-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 20px auto 0;
+}
+
+.item {
+  width: calc(33.33% - 20px);
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.item .title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.item .date {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.item .participants {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.no-elements {
+  margin-top: 40px;
+  max-width: 400px;
+  max-height: 400px;
+}
+

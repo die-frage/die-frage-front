@@ -1,4 +1,4 @@
-export class Question {
+export interface Question {
   question_id: number;
   question: string;
   type_question: string;
