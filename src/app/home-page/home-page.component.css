@@ -92,6 +92,11 @@
   margin-top: 10px;
 }
 
+.item .time {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 .item .participants {
   font-size: 16px;
   margin-top: 10px;

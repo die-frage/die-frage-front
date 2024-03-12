@@ -14,7 +14,7 @@ export class HomePageComponent {
 
   info: any;
   user: User | undefined;
-  surveys: Survey[]| undefined;
+  surveys: Survey[] | undefined;
 
   constructor(private token: TokenStorageService,
               private userService: UserService,
@@ -22,17 +22,17 @@ export class HomePageComponent {
   }
 
   async ngOnInit() {
-    // this.user = undefined;
     this.info = {
       username: this.token.getUserName(),
       token: this.token.getToken()
-    }
+    };
     this.user = await this.getUserByEmail(this.info.username);
     if (this.user) this.surveys = await this.getAllSurveys(this.user);
+    console.log(this.surveys);
   }
 
   onClickAddSurvey() {
-    console.log("clicked")
+    console.log("clicked");
   }
 
   handleKeyPress(event: KeyboardEvent) {
