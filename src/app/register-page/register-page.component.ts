@@ -49,7 +49,7 @@ export class RegisterPageComponent {
     const fio: string[] = fullName.split(' ');
     let lastName: string | null = ' ';
     let firstName: string | null = ' ';
-    let patronomic: string | null = ' ';
+    let patronymic: string | null = ' ';
 
     if (fio.length > 0 && fio[0] !== null) {
       lastName = fio[0];
@@ -58,7 +58,7 @@ export class RegisterPageComponent {
       firstName = fio[1];
     }
     if (fio.length > 2 && fio[2] !== null) {
-      patronomic = fio[2];
+      patronymic = fio[2];
     }
 
     const signUpInfo = new SignUpInfo(
@@ -66,7 +66,7 @@ export class RegisterPageComponent {
       this.registerForm.get('password')?.value,
       lastName,
       firstName,
-      patronomic,
+      patronymic,
     );
 
     this.authService.signUp(signUpInfo).subscribe(
