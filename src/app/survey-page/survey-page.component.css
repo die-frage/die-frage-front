@@ -24,11 +24,7 @@
     margin-right: 40px;
 }
 
-.description {
-    border: 2px solid #1A2A44;
-}
-
-.block:nth-child(2) .info {
+.info {
     border: 1px solid #ccc;
     padding: 10px;
 }
@@ -70,4 +66,12 @@ button[type="submit"]:hover {
     flex-direction: row;
     padding: 10px;
     margin-left: 20px;
+}
+
+.delete-btn {
+    background-color: #DF6767;
+}
+
+.delete-btn[type="submit"]:hover {
+    background-color: #ff4040;
 }

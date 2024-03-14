@@ -5,7 +5,7 @@
     </div>
 
     <div *ngIf="survey" class="block-manager">
-        <div class="block description">
+        <div class="block">
             <h3>Общая информация</h3>
             <div class="info">
                 <p>Описание опроса: {{description}}</p>
@@ -20,25 +20,21 @@
         <div class="block" *ngIf="!isFinished">
             <img src="assets/pictures/icons/QR-code.jpg" alt="QR Code" width="300" height="300">
         </div>
-        <div class="block" *ngIf="!isFinished else results">
+        <div class="block_ver" *ngIf="isFinished" >
+            <div class="sub-block">
+                <img (click)="downloadWord()" src="assets/pictures/icons/word.png" class="img-row" alt="Image 1" width="80" height="80">
+                <img (click)="downloadExcel()" src="assets/pictures/icons/excel.png" class="img-row" alt="Image 2" width="80" height="80">
+                <img (click)="downloadPdf()" src="assets/pictures/icons/pdf.png" class="img-row" alt="Image 3" width="80" height="80">
+            </div>
+        </div>
+        <div class="block">
             <button *ngIf="!isStarted" type="submit" (click)="startSurvey()">Начать</button>
             <button *ngIf="isStarted && !isFinished" type="submit" (click)="stopSurvey()">Завершить</button>
-            <button type="submit" (click)="deleteSurvey()">Удалить</button>
+            <button class="delete-btn" type="submit" (click)="deleteSurvey()">Удалить</button>
             <button *ngIf="!isFinished" type="submit" (click)="copyLink()">Скопировать ссылку</button>
-            <p class="link-tg">{{survey.link}}</p>
+            <p *ngIf="!isFinished" class="link-tg">{{survey.link}}</p>
+            <button *ngIf="isFinished" type="submit" (click)="analyseSurvey()">Аналитика</button>
         </div>
-        <ng-template #results>
-            <div class="block_ver">
-                <div class="sub-block">
-                    <img (click)="downloadWord()" src="assets/pictures/icons/word.png" class="img-row" alt="Image 1" width="80" height="80">
-                    <img (click)="downloadExcel()" src="assets/pictures/icons/excel.png" class="img-row" alt="Image 2" width="80" height="80">
-                    <img (click)="downloadPdf()" src="assets/pictures/icons/pdf.png" class="img-row" alt="Image 3" width="80" height="80">
-                </div>
-            </div>
-            <div class="block">
-                <button *ngIf="isFinished" type="submit" (click)="analyseSurvey()">Аналитика</button>
-            </div>
-        </ng-template>
     </div>
 
 </div>
