@@ -59,7 +59,7 @@ export class HomePageComponent {
                 survey: survey
             }
         };
-        this.router.navigate(['/edit-survey'], navigationExtras);
+        this.router.navigate(['/survey'], navigationExtras);
     }
 
     onClickAddSurvey() {

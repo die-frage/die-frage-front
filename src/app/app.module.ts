@@ -16,6 +16,8 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { EditSurveyPageComponent } from './edit-survey-page/edit-survey-page.component';
 import { AddSurveyPageComponent } from './add-survey-page/add-survey-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { SurveyPageComponent } from './survey-page/survey-page.component';
+import { AnalyseSurveyPageComponent } from './analyse-survey-page/analyse-survey-page.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { UserPageComponent } from './user-page/user-page.component';
         HomePageComponent,
         EditSurveyPageComponent,
         AddSurveyPageComponent,
-        UserPageComponent
+        UserPageComponent,
+        SurveyPageComponent,
+        AnalyseSurveyPageComponent
     ],
     imports: [
         BrowserModule,

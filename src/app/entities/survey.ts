@@ -4,7 +4,7 @@ import {Status} from "./status";
 import {User} from "./user";
 
 export class Survey {
-    survey_id: number;
+    id: number;
     title: string;
     max_students: number;
     code: string;
@@ -23,7 +23,7 @@ export class Survey {
         link: string, qrCode: string, date_begin: string, date_end: string,
         type: string, user: User, status: Status, point_system: PointSystem[],
         questions: Question[]) {
-        this.survey_id = survey_id;
+        this.id = survey_id;
         this.title = title;
         this.max_students = max_students;
         this.code = code;

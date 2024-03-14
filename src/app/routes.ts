@@ -6,6 +6,8 @@ import {authGuard} from "./routing/auth.guard";
 import {EditSurveyPageComponent} from "./edit-survey-page/edit-survey-page.component";
 import {AddSurveyPageComponent} from "./add-survey-page/add-survey-page.component";
 import {UserPageComponent} from "./user-page/user-page.component";
+import {SurveyPageComponent} from "./survey-page/survey-page.component";
+import {AnalyseSurveyPageComponent} from "./analyse-survey-page/analyse-survey-page.component";
 
 const routeConfig: Routes = [
     {
@@ -19,8 +21,20 @@ const routeConfig: Routes = [
         title: 'Die Frage'
     },
     {
+        path: 'user-page',
+        component: UserPageComponent,
+        canActivate: [authGuard],
+        title: 'Die Frage'
+    },
+    {
         path: '',
         component: HomePageComponent,
+        canActivate: [authGuard],
+        title: 'Die Frage'
+    },
+    {
+        path: 'survey',
+        component: SurveyPageComponent,
         canActivate: [authGuard],
         title: 'Die Frage'
     },
@@ -37,12 +51,11 @@ const routeConfig: Routes = [
         title: 'Die Frage'
     },
     {
-        path: 'user-page',
-        component: UserPageComponent,
+        path: 'analyse-survey',
+        component: AnalyseSurveyPageComponent,
         canActivate: [authGuard],
         title: 'Die Frage'
-    }
-
+    },
 ];
 
 export default routeConfig;

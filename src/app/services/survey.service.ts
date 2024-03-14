@@ -19,4 +19,16 @@ export class SurveyService {
     getAllSurveysByProfessorId(professorId: number): Observable<Survey[]> {
         return this.http.get<Survey[]>(`${this.baseUrl}/${professorId}/all`, httpOptions);
     }
+
+    deleteSurvey(professorId: number, surveyId: number): Observable<Survey> {
+        return this.http.delete<Survey>(`${this.baseUrl}/${professorId}/${surveyId}/delete`, httpOptions);
+    }
+
+    startSurvey(professorId: number, surveyId: number): Observable<Survey> {
+        return this.http.put<Survey>(`${this.baseUrl}/${professorId}/${surveyId}/start`, httpOptions);
+    }
+
+    stopSurvey(professorId: number, surveyId: number): Observable<Survey> {
+        return this.http.put<Survey>(`${this.baseUrl}/${professorId}/${surveyId}/stop`, httpOptions);
+    }
 }
