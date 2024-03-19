@@ -24,7 +24,7 @@ export class UserPageComponent {
                 private tokenStorage: TokenStorageService,
                 private router: Router) {
 
-        const fullnameOld = (this.user?.lastName + " " + this.user?.firstName + " " + this.user?.patronymic).replace(/^\s+/g, '');
+        const fullnameOld = (this.user?.last_name + " " + this.user?.first_name + " " + this.user?.patronymic).replace(/^\s+/g, '');
         this.updateForm = this.formBuilder.group({
             fullname: [fullnameOld, Validators.required],
             email: [this.user?.email, [Validators.required, Validators.email]],
@@ -40,7 +40,7 @@ export class UserPageComponent {
         };
         this.user = await this.getUserByEmail(this.info.username);
 
-        const fullnameOld = (this.user?.lastName + " " + this.user?.firstName + " " + this.user?.patronymic).replace(/^\s+/g, '');
+        const fullnameOld = (this.user?.last_name + " " + this.user?.first_name + " " + this.user?.patronymic).replace(/^\s+/g, '');
         this.updateForm = this.formBuilder.group({
             fullname: [fullnameOld, Validators.required],
             email: [this.user?.email, [Validators.required, Validators.email]],

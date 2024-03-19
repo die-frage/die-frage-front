@@ -6,6 +6,7 @@ import {User} from "../entities/user";
 import {UserService} from "../services/user.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import { saveAs } from 'file-saver';
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-survey-page',
@@ -18,8 +19,7 @@ export class SurveyPageComponent implements OnInit {
     dateBegin = "";
     dateEnd = "";
     maxParticipants = "";
-    isAntonym = "";
-    isWithPoints = "";
+    isAnonymous = "";
     isFinished = false;
     isStarted = false;
 
@@ -45,10 +45,9 @@ export class SurveyPageComponent implements OnInit {
             this.dateBegin = this.getFormattedDate(this.survey.date_begin);
             this.dateEnd = this.getFormattedDate(this.survey.date_end);
             this.maxParticipants = this.survey.max_students.toString();
-            this.isAntonym = this.survey.type;
-            this.isWithPoints = this.survey.point_system.length > 0 ? "Да" : "нет";
+            this.isAnonymous = this.survey.anonymous ? "Да" : "Нет";
             this.surveyTitle = this.survey.title;
-
+            console.log(this.survey.qr_code);
             if (this.survey.status.name === "CREATED") {
                 this.isStarted = false;
                 this.isFinished = false;
@@ -61,9 +60,6 @@ export class SurveyPageComponent implements OnInit {
                 this.isStarted = true;
                 this.isFinished = true;
             }
-            console.log(this.survey.status.name);
-            console.log(this.isStarted);
-            console.log(this.isFinished);
         }
     }
 
@@ -123,7 +119,6 @@ export class SurveyPageComponent implements OnInit {
         if (this.user && this.survey)
             this.surveyService.deleteSurvey(this.user.id, this.survey.id).subscribe(
                 (response) => {
-                    console.log('Survey deleted successfully:', response);
                     this.router.navigate([''])
                 },
                 (error) => {

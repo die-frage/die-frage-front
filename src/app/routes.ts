@@ -47,7 +47,7 @@ const routeConfig: Routes = [
     {
         path: 'add-survey',
         component: AddSurveyPageComponent,
-        canActivate: [authGuard],
+        // canActivate: [authGuard],
         title: 'Die Frage'
     },
     {

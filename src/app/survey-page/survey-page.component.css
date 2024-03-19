@@ -75,3 +75,9 @@ button[type="submit"]:hover {
 .delete-btn[type="submit"]:hover {
     background-color: #ff4040;
 }
+
+.link-tg:hover {
+    color: #1850b7;
+    text-decoration: underline;
+    cursor: pointer;
+}

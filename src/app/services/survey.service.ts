@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Survey} from "../entities/survey";
 import {Observable} from "rxjs";
 
@@ -18,6 +18,10 @@ export class SurveyService {
 
     getAllSurveysByProfessorId(professorId: number): Observable<Survey[]> {
         return this.http.get<Survey[]>(`${this.baseUrl}/${professorId}/all`, httpOptions);
+    }
+
+    addSurvey(professorId: number, surveyData: any): Observable<Survey> {
+        return this.http.post<Survey>(`${this.baseUrl}/${professorId}/add`, surveyData, httpOptions);
     }
 
     deleteSurvey(professorId: number, surveyId: number): Observable<Survey> {

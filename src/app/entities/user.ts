@@ -1,15 +1,15 @@
 export class User {
     id: number;
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     patronymic: string;
     email: string;
     password: string[];
 
-    constructor(id: number, firstName: string, lastName: string, patronymic: string, email: string, password: string[]) {
+    constructor(id: number, first_name: string, last_name: string, patronymic: string, email: string, password: string[]) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.patronymic = patronymic;
         this.email = email;
         this.password = password;

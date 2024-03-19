@@ -12,13 +12,12 @@
                 <p>Начинается: {{dateBegin}}</p>
                 <p>Завершится: {{dateEnd}}</p>
                 <p>Максимум участников: {{maxParticipants}}</p>
-                <p>Анонимный: {{isAntonym}}</p>
-                <p>Бальный: {{isWithPoints}}</p>
+                <p>Анонимный: {{isAnonymous}}</p>
             </div>
             <button *ngIf="!isStarted" type="submit" (click)="editSurvey()">Редактировать</button>
         </div>
         <div class="block" *ngIf="!isFinished">
-            <img src="assets/pictures/icons/QR-code.jpg" alt="QR Code" width="300" height="300">
+            <img src="{{survey.qr_code}}" alt="QR Code" width="300" height="300">
         </div>
         <div class="block_ver" *ngIf="isFinished" >
             <div class="sub-block">
@@ -31,8 +30,7 @@
             <button *ngIf="!isStarted" type="submit" (click)="startSurvey()">Начать</button>
             <button *ngIf="isStarted && !isFinished" type="submit" (click)="stopSurvey()">Завершить</button>
             <button class="delete-btn" type="submit" (click)="deleteSurvey()">Удалить</button>
-            <button *ngIf="!isFinished" type="submit" (click)="copyLink()">Скопировать ссылку</button>
-            <p *ngIf="!isFinished" class="link-tg">{{survey.link}}</p>
+            <p *ngIf="!isFinished" (click)="copyLink()" class="link-tg">Скопировать ссылку: {{survey.link}}</p>
             <button *ngIf="isFinished" type="submit" (click)="analyseSurvey()">Аналитика</button>
         </div>
     </div>
