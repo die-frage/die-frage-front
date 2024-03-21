@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {User} from "../entities/user";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {UserService} from "../services/user.service";
+import {User} from "../../entities/user";
+import {TokenStorageService} from "../../auth/token-storage.service";
+import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../auth/auth.service";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
     selector: 'app-user-page',

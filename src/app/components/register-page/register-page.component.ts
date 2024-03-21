@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {SignUpInfo} from "../auth/responces/SignUpInfo";
-import {AuthService} from "../auth/auth.service";
+import {SignUpInfo} from "../../auth/responces/SignUpInfo";
+import {AuthService} from "../../auth/auth.service";
 import {Router} from "@angular/router";
-import {TokenStorageService} from "../auth/token-storage.service";
+import {TokenStorageService} from "../../auth/token-storage.service";
 
 @Component({
     selector: 'app-register-page',

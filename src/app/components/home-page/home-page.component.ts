@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TokenStorageService} from "../auth/token-storage.service";
-import {Survey} from "../entities/survey";
-import {SurveyService} from "../services/survey.service";
-import {User} from "../entities/user";
-import {UserService} from "../services/user.service";
+import {TokenStorageService} from "../../auth/token-storage.service";
+import {Survey} from "../../entities/survey";
+import {SurveyService} from "../../services/survey.service";
+import {User} from "../../entities/user";
+import {UserService} from "../../services/user.service";
 import {NavigationExtras, Router} from "@angular/router";
 
 @Component({

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {User} from "../entities/user";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {UserService} from "../services/user.service";
-import {SurveyService} from "../services/survey.service";
+import {User} from "../../entities/user";
+import {TokenStorageService} from "../../auth/token-storage.service";
+import {UserService} from "../../services/user.service";
+import {SurveyService} from "../../services/survey.service";
 import {Router} from "@angular/router";
-import {Question} from "../entities/question";
+import {Question} from "../../entities/question";
 
 @Component({
     selector: 'app-add-survey-page',
@@ -46,7 +46,6 @@ export class AddSurveyPageComponent {
             const urlEmail = email.replace(/@/g, '%40');
             return await this.userService.getUserByEmail(urlEmail).toPromise();
         } catch (error) {
-            console.log('Error fetching user:', error);
             return undefined;
         }
     }
@@ -124,13 +123,12 @@ export class AddSurveyPageComponent {
             max_students: this.maxParticipants,
             questions: this.questions
         };
-        console.log('Survey Data:', surveyData); // Добавим эту строку для логирования данных перед отправкой на сервер
         if (!this.user) return;
 
         this.surveyService.addSurvey(this.user.id, surveyData).subscribe(() => {
-
+            this.router.navigate(['/']);
         }, error => {
-            console.error('Error starting survey:', error);
+
         });
     }
 
