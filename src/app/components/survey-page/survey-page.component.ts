@@ -47,7 +47,6 @@ export class SurveyPageComponent implements OnInit {
             this.maxParticipants = this.survey.max_students.toString();
             this.isAnonymous = this.survey.anonymous ? "Да" : "Нет";
             this.surveyTitle = this.survey.title;
-            console.log(this.survey.qr_code);
             if (this.survey.status.name === "CREATED") {
                 this.isStarted = false;
                 this.isFinished = false;

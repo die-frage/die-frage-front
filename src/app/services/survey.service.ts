@@ -35,4 +35,8 @@ export class SurveyService {
     stopSurvey(professorId: number, surveyId: number): Observable<Survey> {
         return this.http.put<Survey>(`${this.baseUrl}/${professorId}/${surveyId}/stop`, httpOptions);
     }
+
+    updateSurvey(professorId: number, surveyId: number, surveyData: any): Observable<Survey> {
+        return this.http.put<Survey>(`${this.baseUrl}/${professorId}/${surveyId}/update`, surveyData, httpOptions);
+    }
 }
