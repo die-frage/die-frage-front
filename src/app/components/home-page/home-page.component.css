@@ -1,0 +1,113 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.element-add {
+  display: flex;
+  margin: 10px;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+}
+
+.element-add p{
+  margin-right: 20px;
+}
+
+.element-add button {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #1A2A44;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #FFFFFF;
+  background-image: url('src/assets/pictures/icons/add.png');
+  background-size: 35px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.element-search-box {
+  max-width: 1000px; /* Максимальная ширина поискового поля */
+  width: 100%; /* Ширина будет масштабироваться в зависимости от контейнера */
+  margin: 0 auto; /* Выравнивание по центру */
+  border: 2px solid #1A2A44;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.element-search-box img {
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  padding-left: 5px;
+}
+
+.element-search-box input[type="text"] {
+  flex: 0.8;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.element-search-box input[type="text"]::placeholder {
+  color: #7B7B7B;
+  font-size: 18px;
+}
+
+.element-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 20px auto 0;
+}
+
+.item {
+  width: calc(33.33% - 20px);
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.item .title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.item .date {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.item .time {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.item .participants {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.no-elements {
+  margin-top: 40px;
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.item:hover {
+  background-color: #e0e0e0;;
+}

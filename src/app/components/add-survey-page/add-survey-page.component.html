@@ -1,0 +1,80 @@
+<div class="container">
+    <h1 *ngIf="step > 3" >{{ surveyName }}</h1>
+    <form *ngIf="step === 0" (ngSubmit)="nextStep()">
+        <label class="bold-label" style="margin-bottom: 20px;">Тип опроса</label>
+        <div class="wrap-horizontal">
+            <div class="anonym-div" (click)="chooseNotAnonymous()" [class.active]="isAnonymous == false">
+                <label style="font-weight: bold; font-size: 20px">Не анонимный опрос</label>
+                <p style="padding: 10px">Описание не анонимного опроса: это такой опрос, когда... .</p>
+            </div>
+            <div class="anonym-div" (click)="chooseAnonymous()" [class.active]="isAnonymous == true" style="margin-left: 10px;">
+                <label style="font-weight: bold; font-size: 20px">Анонимный опрос</label>
+                <p style="padding: 10px">Описание анонимного опроса: это такой опрос, когда... .</p>
+            </div>
+        </div>
+        <style>
+            .active {
+                background-color: rgba(24, 80, 183, 0.1);
+                border: 1px solid #1A2A44;
+            }
+        </style>
+    </form>
+    <form *ngIf="step === 1" (ngSubmit)="nextStep()">
+        <label for="startTime">Время начала опроса:</label>
+        <input type="datetime-local" id="startTime" name="startTime" [(ngModel)]="startTime" required [min]="minStartTime">
+        <label for="endTime">Время окончания опроса:</label>
+        <input type="datetime-local" id="endTime" name="endTime" [(ngModel)]="endTime" required [min]="minEndTime">
+    </form>
+    <form *ngIf="step === 2" (ngSubmit)="nextStep()">
+        <label class="bold-label" for="surveyName">Название опроса:</label>
+        <input placeholder="new survey" type="text" id="surveyName" name="surveyName" [(ngModel)]="surveyName" required maxlength="20" minlength="1">
+    </form>
+    <form *ngIf="step === 3" (ngSubmit)="nextStep()">
+        <label class="bold-label" for="surveyDescription">Описание опроса:</label>
+        <textarea placeholder="description new survey" id="surveyDescription" name="surveyDescription" [(ngModel)]="surveyDescription" required maxlength="50"></textarea>
+    </form>
+    <form *ngIf="step === 4" (ngSubmit)="nextStep()">
+        <label class="bold-label" for="maxParticipants">Максимальное число участников:</label>
+        <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="maxParticipants" required [max]="50">
+    </form>
+    <form *ngIf="step === 5" (ngSubmit)="createSurvey()">
+        <div class="wrap-question" *ngFor="let question of questions; let i = index">
+            <label class="bold-label">Вопрос {{ i + 1 }}:</label>
+            <input placeholder="Вопрос № {{i+1}}" type="text" [ngModel]="question.question" (blur)="updateQuestion($any($event.target).value, i, 'question')" name="question_{{i}}" required >
+
+            <label class="bold-label">Настройки:</label>
+            <div class="wrap-horizontal-radio">
+                <input type="radio" [value]="'MULTIPLE'" [ngModel]="question.type_question" name="type_question_{{i}}" (change)="toggleOptions(question)">
+                <p>Множественный выбор</p>
+            </div>
+            <div class="wrap-horizontal-radio">
+                <input type="radio" [value]="'NO_CHOICE'" [ngModel]="question.type_question" name="type_question_{{i}}" (change)="toggleOptions(question)">
+                <p>Один ответ</p>
+            </div>
+            <label *ngIf="question.type_question === 'MULTIPLE'" class="bold-label">Баллы за правильный ответ:</label>
+            <input *ngIf="question.type_question === 'MULTIPLE'" placeholder="Баллы за правильный ответ" type="number" [ngModel]="question.points" (blur)="updatePoints($any($event.target).value, i, 'points')" name="points_{{i}}" required>
+            <label class="bold-label">Время на ответ (секунды):</label>
+            <input placeholder="Время на ответ (секунды)" type="number" [ngModel]="question.time_limit" (blur)="updateTimeLimit($any($event.target).value, i, 'time_limit')" name="time_limit_{{i}}" required>
+            <div *ngIf="question.type_question === 'MULTIPLE' ">
+                <label class="bold-label">Варианты ответов:</label>
+                <input placeholder="Правильный ответ" type="text" [ngModel]="question.correct_answers[0]" (blur)="updateCorrectAnswer($any($event.target).value, i, 'correct_answer')" name="correct_answer_{{i}}" required>
+                <label class="bold-label">Неправильные варианты ответов:</label>
+                <div *ngFor="let incorrect_answers of question.incorrect_answers; let j = index">
+                    <input placeholder="Неправильный ответ № {{j+1}}" type="text" [ngModel]="incorrect_answers" (blur)="updateIncorrectAnswer($any($event.target).value, i, j)" name="incorrect_answer_{{i}}_{{j}}">
+                </div>
+                <p (click)="addNewIncorrectAnswer(question)" class="question-manager">Добавить вариант ответа</p>
+            </div>
+            <p class="question-manager" (click)="deleteQuestion(i)">Удалить</p>
+        </div>
+
+        <p (click)="addNewQuestion()" class="question-manager">Добавить вопрос</p>
+    </form>
+</div>
+
+<div class="wrap-btn">
+    <button type="button" *ngIf="step !== 0" (click)="previousStep()">Назад</button>
+    <button type="button" *ngIf="step === 0" (click)="cancel()">Отменить</button>
+    <button type="submit" *ngIf="step !== 5" (click)="nextStep()">Дальше</button>
+    <button type="submit" *ngIf="step === 5" (click)="createSurvey()">Создать опрос</button>
+</div>
+
