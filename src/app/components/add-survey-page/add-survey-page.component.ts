@@ -5,6 +5,7 @@ import {UserService} from "../../services/user.service";
 import {SurveyService} from "../../services/survey.service";
 import {Router} from "@angular/router";
 import {Question} from "../../entities/question";
+import {saveAs} from "file-saver";
 
 @Component({
     selector: 'app-add-survey-page',
@@ -14,6 +15,7 @@ import {Question} from "../../entities/question";
 export class AddSurveyPageComponent {
     info: any;
     user: User | undefined;
+    fromBackError = false;
 
     surveyName: string = 'new survey';
     surveyDescription: string = 'description new survey';
@@ -26,6 +28,9 @@ export class AddSurveyPageComponent {
 
     minStartTime: Date = new Date();
     minEndTime: Date = new Date();
+
+    fileGot: boolean = false;
+    private file: File | undefined;
 
     constructor(private token: TokenStorageService,
                 private userService: UserService,
@@ -50,9 +55,13 @@ export class AddSurveyPageComponent {
         }
     }
 
-    step: number = 0;
+    step: number = -1;
 
     nextStep() {
+        if (this.step == -1) {
+            this.step = 0;
+            return;
+        }
         if (this.startTime == undefined || this.endTime == undefined) {
             this.step = 1;
             return;
@@ -203,5 +212,55 @@ export class AddSurveyPageComponent {
         if (timeLimit === 'time_limit') {
             this.questions[i].time_limit = value;
         }
+    }
+
+    downloadTemplateExcel() {
+        const fileName = 'assets/files/template.xlsx';
+        this.downloadFile(fileName);
+    }
+
+    private downloadFile(fileName: string): void {
+        this.fromBackError = false;
+        fetch(fileName)
+            .then(response => response.blob())
+            .then(blob => {
+                const fileParts = fileName.split('/');
+                const name = fileParts[fileParts.length - 1];
+                saveAs(blob, name);
+            })
+            .catch(error => {
+            });
+    }
+
+    handleDragOver(event: DragEvent) {
+        event.preventDefault();
+        this.fileGot = false;
+        this.fromBackError = false;
+    }
+
+    handleDrop(event: DragEvent) {
+        event.preventDefault();
+        const files = event.dataTransfer!.files;
+        this.fileGot = true;
+        this.file = files[0];
+        this.fromBackError = false;
+    }
+
+    onFileSelected($event: Event) {
+        if (!this.file) return;
+        const file = this.file;
+        if (!file.name.endsWith('.xlsx')) return;
+        if (!this.user) return;
+        this.surveyService.addSurveyExcel(this.user.id, file).subscribe(() => {
+            this.router.navigate(['/']);
+        }, error => {
+            if (error.error.code == "INVALID_EXCEL_FORMAT") {
+                this.fromBackError = true;
+                this.fileGot = false;
+                this.file?.slice(this.file?.size + 1);
+            } else {
+                this.fromBackError = false;
+            }
+        });
     }
 }

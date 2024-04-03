@@ -80,6 +80,7 @@ export class SurveyPageComponent implements OnInit {
         };
         this.router.navigate(['/analyse-survey'], navigationExtras);
     }
+
     editSurvey() {
         const navigationExtras: NavigationExtras = {
             state: {
@@ -88,6 +89,7 @@ export class SurveyPageComponent implements OnInit {
         };
         this.router.navigate(['/edit-survey'], navigationExtras);
     }
+
     stopSurvey() {
         if (this.user && this.survey)
             this.surveyService.stopSurvey(this.user.id, this.survey.id).subscribe(
@@ -101,6 +103,7 @@ export class SurveyPageComponent implements OnInit {
                 }
             );
     }
+
     startSurvey() {
         if (this.user && this.survey)
             this.surveyService.startSurvey(this.user.id, this.survey.id).subscribe(
@@ -114,6 +117,7 @@ export class SurveyPageComponent implements OnInit {
                 }
             );
     }
+
     deleteSurvey() {
         if (this.user && this.survey)
             this.surveyService.deleteSurvey(this.user.id, this.survey.id).subscribe(
@@ -141,6 +145,7 @@ export class SurveyPageComponent implements OnInit {
         // Форматируем дату в соответствии с требуемым форматом
         return parsedDate.toLocaleString('ru-RU', options);
     }
+
     copyLink() {
         if (this.survey) {
             const el = document.createElement('textarea');
@@ -154,28 +159,29 @@ export class SurveyPageComponent implements OnInit {
 
     downloadWord(): void {
         const fileName = 'assets/files/word_file.docx';
-        this.downloadFile(fileName, 'application/msword');
+        this.downloadFile(fileName);
     }
 
     downloadExcel(): void {
         const fileName = 'assets/files/excel_file.xlsx';
-        this.downloadFile(fileName, 'application/vnd.ms-excel');
+        this.downloadFile(fileName);
     }
 
     downloadPdf(): void {
         const fileName = 'assets/files/pdf_file.pdf';
-        this.downloadFile(fileName, 'application/pdf');
+        this.downloadFile(fileName);
     }
 
-    private downloadFile(fileName: string, mimeType: string): void {
+    private downloadFile(fileName: string): void {
         fetch(fileName)
             .then(response => response.blob())
             .then(blob => {
-                saveAs(blob, fileName.split('/').pop());
+                const fileParts = fileName.split('/');
+                const name = fileParts[fileParts.length - 1];
+                saveAs(blob, name);
             })
             .catch(error => {
                 console.error('Error downloading file:', error);
-                // Обработка ошибки загрузки файла, например, показ сообщения об ошибке.
             });
     }
 }

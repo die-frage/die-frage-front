@@ -167,3 +167,37 @@ form {
     min-width: 400px;
     margin-bottom: 100px;
 }
+.file-drop {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-label {
+    font-size: 16px;
+    color: #666;
+}
+
+.file-drop:hover {
+    background-color: #f9f9f9;
+}
+
+.file-drop.dragover {
+    background-color: #f0f8ff;
+}
+
+.fileGot {
+    background-color: #b1b1b1;
+}
+
+.error-message {
+    color: #DF6767;
+    font-size: 14px;
+    margin-top: 5px;
+}
