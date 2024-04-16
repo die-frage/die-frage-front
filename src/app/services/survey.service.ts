@@ -14,6 +14,7 @@ export class SurveyService {
     private baseUrl = 'http://localhost:8080/api/survey';
 
     constructor(private http: HttpClient) {
+
     }
 
     getAllSurveysByProfessorId(professorId: number): Observable<Survey[]> {
@@ -38,5 +39,11 @@ export class SurveyService {
 
     updateSurvey(professorId: number, surveyId: number, surveyData: any): Observable<Survey> {
         return this.http.put<Survey>(`${this.baseUrl}/${professorId}/${surveyId}/update`, surveyData, httpOptions);
+    }
+
+    addSurveyExcel(professorId: number, file: File): Observable<Survey> {
+        const formData: FormData = new FormData();
+        formData.append('file', file, file.name);
+        return this.http.post<Survey>(`${this.baseUrl}/${professorId}/add/excel`, formData);
     }
 }

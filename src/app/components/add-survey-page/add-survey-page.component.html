@@ -1,5 +1,26 @@
 <div class="container">
     <h1 *ngIf="step > 3" >{{ surveyName }}</h1>
+    <form *ngIf="step === -1">
+        <label class="bold-label" style="margin-bottom: 20px;">Как создать опрос?</label>
+        <div class="wrap-horizontal">
+            <div class="anonym-div">
+                <button type="button" (click)="nextStep()">Использовать конструктор</button>
+            </div>
+            <div class="anonym-div" style="margin-left: 10px;">
+                <div class="anonym-div" style="margin-left: 10px;" (dragover)="handleDragOver($event)" (drop)="handleDrop($event)">
+                    <label style="font-weight: bold; font-size: 20px">Загрузить опрос</label>
+                    <p style="padding: 10px">Используйте шаблон формата .xlsx</p>
+                    <div class="file-drop" id="fileDropArea" [ngClass]="{'fileGot': fileGot}">
+                        <div class="file-label" *ngIf="!fileGot">Перетащите файл сюда</div>
+                        <div class="file-label" *ngIf="fileGot">Файл загружен</div>
+                    </div>
+                    <button type="button" (click)="onFileSelected($event)">Загрузить опрос</button>
+                    <button type="button" (click)="downloadTemplateExcel()">Скачать шаблон</button>
+                    <div *ngIf="fromBackError" class="error-message">Неверно заполнен шаблон файла</div>
+                </div>
+            </div>
+        </div>
+    </form>
     <form *ngIf="step === 0" (ngSubmit)="nextStep()">
         <label class="bold-label" style="margin-bottom: 20px;">Тип опроса</label>
         <div class="wrap-horizontal">
