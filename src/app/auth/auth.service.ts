@@ -14,8 +14,8 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class AuthService {
-    private signInUrl = 'http://localhost:8080/auth/sign-in';
-    private signUpUrl = 'http://localhost:8080/auth/sign-up';
+    private signInUrl = 'http://localhost:8787/auth/sign-in';
+    private signUpUrl = 'http://localhost:8787/auth/sign-up';
 
     signIn(credentials: SignInInfo): Observable<JwtResponse> {
         return this.http.post<JwtResponse>(this.signInUrl, credentials, httpOptions);

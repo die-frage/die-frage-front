@@ -40,6 +40,7 @@ export class AuthPageComponent {
         const loginInInfo = new SignInInfo(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value);
         this.authService.signIn(loginInInfo).subscribe(
             data => {
+                console.log(data)
                 this.tokenStorage.saveToken(data.token);
                 this.tokenStorage.saveEmail(loginInInfo.email);
                 this.router.navigate(['']);
@@ -48,6 +49,7 @@ export class AuthPageComponent {
                 if (error.status === 404 || error.status === 403) {
                     this.fromBackError = true;
                 }
+                console.log(error)
             }
         )
     }

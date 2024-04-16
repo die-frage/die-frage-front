@@ -6,7 +6,6 @@ import {User} from "../../entities/user";
 import {UserService} from "../../services/user.service";
 import {TokenStorageService} from "../../auth/token-storage.service";
 import { saveAs } from 'file-saver';
-import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-survey-page',
