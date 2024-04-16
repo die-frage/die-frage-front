@@ -5,6 +5,7 @@ import {User} from "./user";
 export class Survey {
     id: number;
     title: string;
+    description: string;
     max_students: number;
     code: string;
     link: string;
@@ -17,12 +18,13 @@ export class Survey {
     questions: Question[];
 
     constructor(
-        survey_id: number, title: string, max_students: number, code: string,
+        survey_id: number, title: string, description: string, max_students: number, code: string,
         link: string, qr_code: string, date_begin: string, date_end: string,
         anonymous: boolean, user: User, status: Status,
         questions: Question[]) {
         this.id = survey_id;
         this.title = title;
+        this.description = description;
         this.max_students = max_students;
         this.code = code;
         this.link = link;

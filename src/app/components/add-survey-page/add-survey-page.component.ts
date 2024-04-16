@@ -125,7 +125,7 @@ export class AddSurveyPageComponent {
         this.clearQuestions();
         const surveyData = {
             title: this.surveyName,
-            // description: this.surveyDescription,
+            description: this.surveyDescription,
             anonymous: this.isAnonymous,
             date_begin: this.startTime,
             date_end: this.endTime,

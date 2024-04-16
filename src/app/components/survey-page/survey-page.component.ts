@@ -40,7 +40,7 @@ export class SurveyPageComponent implements OnInit {
         this.user = await this.getUserByEmail(this.info.username);
         this.survey = history.state.survey;
         if (this.survey) {
-            this.description = this.survey.title;
+            this.description = this.survey.description;
             this.dateBegin = this.getFormattedDate(this.survey.date_begin);
             this.dateEnd = this.getFormattedDate(this.survey.date_end);
             this.maxParticipants = this.survey.max_students.toString();
