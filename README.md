@@ -22,23 +22,22 @@ Angular - это популярный фреймворк для разработ
 Содержит следующие компоненты:
 
 1. **add-survey-page**: Страница добавления нового опроса.  
-   <img src="images/add-survey-page.jpeg" alt="Add Survey Page" width="500"/>
+   <img src="images/add-survey-page.jpeg" alt="Add Survey Page" width="650"/>
 2. **analyse-survey-page**: Страница для просмотра результатов опроса.  
-   <img src="images/analyse-survey-page.jpeg" alt="Analyse Survey Page" width="500"/>
+   <img src="images/analyse-survey-page.jpeg" alt="Analyse Survey Page" width="650"/>
 3. **auth-page**: Страница авторизации.  
-   <img src="images/auth-page.jpeg" alt="Auth Page" width="500"/>
-4. **edit-survey-page**: Страница для редактирования созданного опроса.  
-   <img src="images/edit-survey-page.jpeg" alt="Edit Survey Page" width="500"/>
+   <img src="images/auth-page.jpeg" alt="Auth Page" width="650"/>
+4. **edit-survey-page**: Страница для редактирования созданного опроса.
 5. **header**: Шапка сайта. Реализованы две версии: одна для авторизированного пользователя, другая для не авторизированного.  
-   <img src="images/header.jpeg" alt="Header" width="500"/>
+   <img src="images/header.jpeg" alt="Header" width="650"/>
 6. **home-page**: Страница, содержащая поисковик созданных опросов и список всех опросов пользователя.  
-   <img src="images/home-page.jpeg" alt="Home Page" width="500"/>
+   <img src="images/home-page.jpeg" alt="Home Page" width="650"/>
 7. **register-page**: Страница регистрации пользователя.  
-   <img src="images/register-page.jpeg" alt="Register Page" width="500"/>
+   <img src="images/register-page.jpeg" alt="Register Page" width="650"/>
 8. **survey-page**: Страница опроса, показывающая параметры опроса, ссылку, QR-код, а также возможность скачать результаты опроса.  
-   <img src="images/survey-page.jpeg" alt="Survey Page" width="500"/>
+   <img src="images/survey-page.jpeg" alt="Survey Page" width="650"/>
 9. **user-page**: Страница редактирования личных данных пользователя: имя, фамилия, пароль, почта.  
-   <img src="images/user-page.jpeg" alt="User Page" width="500"/>
+   <img src="images/user-page.jpeg" alt="User Page" width="650"/>
 
 ## Запуск проекта
 
