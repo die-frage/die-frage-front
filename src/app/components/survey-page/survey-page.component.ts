@@ -46,15 +46,15 @@ export class SurveyPageComponent implements OnInit {
             this.maxParticipants = this.survey.max_students.toString();
             this.isAnonymous = this.survey.anonymous ? "Да" : "Нет";
             this.surveyTitle = this.survey.title;
-            if (this.survey.status.name === "CREATED") {
+            if (this.survey.status.name === "CREATED_STATUS") {
                 this.isStarted = false;
                 this.isFinished = false;
             }
-            if (this.survey.status.name === "STARTED") {
+            if (this.survey.status.name === "STARTED_STATUS") {
                 this.isStarted = true;
                 this.isFinished = false;
             }
-            if (this.survey.status.name === "FINISHED") {
+            if (this.survey.status.name === "FINISHED_STATUS") {
                 this.isStarted = true;
                 this.isFinished = true;
             }
@@ -66,7 +66,7 @@ export class SurveyPageComponent implements OnInit {
             const urlEmail = email.replace(/@/g, '%40');
             return await this.userService.getUserByEmail(urlEmail).toPromise();
         } catch (error) {
-            console.log('Error fetching user:', error);
+            console.error('Error getting info user:', error);
             return undefined;
         }
     }
@@ -98,7 +98,7 @@ export class SurveyPageComponent implements OnInit {
                     this.dateEnd = this.getFormattedDate(this.survey.date_end);
                 },
                 (error) => {
-                    console.error('Error starting survey:', error);
+                    console.error('Error stopping survey:', error);
                 }
             );
     }
@@ -138,10 +138,7 @@ export class SurveyPageComponent implements OnInit {
             minute: '2-digit'
         };
 
-        // Парсим строку даты в объект Date
         const parsedDate = new Date(Date.parse(date));
-
-        // Форматируем дату в соответствии с требуемым форматом
         return parsedDate.toLocaleString('ru-RU', options);
     }
 

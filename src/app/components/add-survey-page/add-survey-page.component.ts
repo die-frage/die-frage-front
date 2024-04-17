@@ -51,6 +51,7 @@ export class AddSurveyPageComponent {
             const urlEmail = email.replace(/@/g, '%40');
             return await this.userService.getUserByEmail(urlEmail).toPromise();
         } catch (error) {
+            console.error('Error getting info about user:', error);
             return undefined;
         }
     }
@@ -137,7 +138,7 @@ export class AddSurveyPageComponent {
         this.surveyService.addSurvey(this.user.id, surveyData).subscribe(() => {
             this.router.navigate(['/']);
         }, error => {
-
+            console.error('Error creating survey:', error);
         });
     }
 
@@ -156,14 +157,12 @@ export class AddSurveyPageComponent {
         for (let i = this.questions.length - 1; i >= 0; i--) {
             let question = this.questions[i];
             if (question.type_question === "MULTIPLE") {
-                // correct answers check
                 const corAnswer = question.correct_answers[0];
                 if (question.correct_answers.length != 1 || this.containsOnlySpaces(corAnswer)) {
                     this.questions.splice(i, 1);
                     continue;
                 }
 
-                // incorrect answer check
                 const incorrectAnswer = question.incorrect_answers;
                 for (let j = incorrectAnswer.length - 1; j >= 0; j--) {
                     if (incorrectAnswer[j] == null || this.containsOnlySpaces(incorrectAnswer[j])) {
@@ -229,6 +228,7 @@ export class AddSurveyPageComponent {
                 saveAs(blob, name);
             })
             .catch(error => {
+                console.error('Error downloading file:', error);
             });
     }
 
@@ -255,6 +255,7 @@ export class AddSurveyPageComponent {
             this.router.navigate(['/']);
         }, error => {
             if (error.error.code == "INVALID_EXCEL_FORMAT") {
+                console.error('Error parsing survey from excel:', error);
                 this.fromBackError = true;
                 this.fileGot = false;
                 this.file?.slice(this.file?.size + 1);

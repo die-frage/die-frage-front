@@ -31,6 +31,7 @@ export class EditSurveyPageComponent {
         this.survey = history.state.survey;
         console.log(this.survey);
         this.surveyName = this.survey.title;
+        this.surveyDescription = this.survey.description;
         this.isAnonymous = this.survey.anonymous;
         this.startTime = this.formatDate(new Date(this.survey.date_begin));
         this.endTime = this.formatDate(new Date(this.survey.date_end));
@@ -60,6 +61,7 @@ export class EditSurveyPageComponent {
             const urlEmail = email.replace(/@/g, '%40');
             return await this.userService.getUserByEmail(urlEmail).toPromise();
         } catch (error) {
+            console.error('Error getting info user:', error);
             return undefined;
         }
     }
@@ -154,7 +156,7 @@ export class EditSurveyPageComponent {
         this.clearQuestions();
         const surveyData = {
             title: this.surveyName,
-            // description: this.surveyDescription,
+            description: this.surveyDescription,
             anonymous: this.isAnonymous,
             date_begin: this.startTime,
             date_end: this.endTime,
@@ -166,7 +168,7 @@ export class EditSurveyPageComponent {
         this.surveyService.updateSurvey(this.user.id, this.survey.id, surveyData).subscribe((response) => {
             this.router.navigate(['/']);
         }, error => {
-
+            console.error('Error updating survey:', error);
         });
     }
 
@@ -194,14 +196,12 @@ export class EditSurveyPageComponent {
         for (let i = this.questions.length - 1; i >= 0; i--) {
             let question = this.questions[i];
             if (question.type_question === "MULTIPLE") {
-                // correct answers check
                 const corAnswer = question.correct_answers[0];
                 if (question.correct_answers.length != 1 || this.containsOnlySpaces(corAnswer)) {
                     this.questions.splice(i, 1);
                     continue;
                 }
 
-                // incorrect answer check
                 const incorrectAnswer = question.incorrect_answers;
                 for (let j = incorrectAnswer.length - 1; j >= 0; j--) {
                     if (incorrectAnswer[j] == null || this.containsOnlySpaces(incorrectAnswer[j])) {

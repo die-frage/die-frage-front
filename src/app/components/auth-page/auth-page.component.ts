@@ -49,7 +49,7 @@ export class AuthPageComponent {
                 if (error.status === 404 || error.status === 403) {
                     this.fromBackError = true;
                 }
-                console.log(error)
+                console.error('Error during authentication user:', error);
             }
         )
     }

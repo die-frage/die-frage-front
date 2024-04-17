@@ -48,7 +48,7 @@ export class HomePageComponent {
             const urlEmail = email.replace(/@/g, '%40');
             return await this.userService.getUserByEmail(urlEmail).toPromise();
         } catch (error) {
-            console.log('Error fetching user:', error);
+            console.error('Error getting info user:', error);
             return undefined;
         }
     }

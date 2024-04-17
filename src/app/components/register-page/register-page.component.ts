@@ -79,6 +79,7 @@ export class RegisterPageComponent {
                 if (error.status === 409) {
                     this.fromBackError = true;
                 }
+                console.error('Error during registration user:', error);
             }
         )
     }
