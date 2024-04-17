@@ -1,27 +1,62 @@
-# Front
+# Проект "Die Frage"
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
+## 1. Архитектура проекта
+Angular - это популярный фреймворк для разработки веб-приложений, основанный на TypeScript. Он предоставляет инструменты для создания масштабируемых и поддерживаемых приложений с помощью модульной архитектуры.  
+Проект использует SPA (Single Page Application) архитектуру, что позволяет создать более быстродействующее и отзывчивое приложение для пользователей.
 
-## Development server
+## 2. Структура проекта
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Папка entities
+Здесь собраны все Data Transfer Objects (DTO) для запросов к бэкенду.
 
-## Code scaffolding
+### Папка routing
+Содержит authGuard, который запрещает переход по маршрутам без авторизации пользователя.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Папка services
+В этой папке находятся сервисы, взаимодействующие с бэкендом. Проект использует сервисы для работы с API проекта "Die Frage" (ссылка на проект: [die-frage-api](https://github.com/die-frage/die-frage-api-v2.git)).
 
-## Build
+### Модуль для авторизации auth
+Здесь реализованы сервисы для сохранения jwt токена во временное хранилище браузера и механизм, добавляющий к каждому запросу jwt токена.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Папка components
+Содержит следующие компоненты:
 
-## Running unit tests
+1. **add-survey-page**: Страница добавления нового опроса.
+   <img src="images/add-survey-page.jpeg" alt="Add Survey Page" width="200"/>
+2. **analyse-survey-page**: Страница для просмотра результатов опроса.
+   <img src="images/analyse-survey-page.jpeg" alt="Analyse Survey Page" width="200"/>
+3. **auth-page**: Страница авторизации.
+   <img src="images/auth-page.jpeg" alt="Auth Page" width="200"/>
+4. **edit-survey-page**: Страница для редактирования созданного опроса.
+   <img src="images/edit-survey-page.jpeg" alt="Edit Survey Page" width="200"/>
+5. **header**: Шапка сайта. Реализованы две версии: одна для авторизированного пользователя, другая для не авторизированного.
+   <img src="images/header.jpeg" alt="Header" width="200"/>
+6. **home-page**: Страница, содержащая поисковик созданных опросов и список всех опросов пользователя.
+   <img src="images/home-page.jpeg" alt="Home Page" width="200"/>
+7. **register-page**: Страница регистрации пользователя.
+   <img src="images/register-page.jpeg" alt="Register Page" width="200"/>
+8. **survey-page**: Страница опроса, показывающая параметры опроса, ссылку, QR-код, а также возможность скачать результаты опроса.
+   <img src="images/survey-page.jpeg" alt="Survey Page" width="200"/>
+9. **user-page**: Страница редактирования личных данных пользователя: имя, фамилия, пароль, почта.
+   <img src="images/user-page.jpeg" alt="User Page" width="200"/>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Запуск проекта
 
-## Running end-to-end tests
+Проект запускается с помощью команды из корневой директории проекта:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng serve
+```
 
-## Further help
+После запуска проект доступ к приложению осуществляется через браузер по ссылке:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[http://localhost:4200/](http://localhost:4200/)
+
+## Используемые технологии
+
+Проект "Die Frage" разработан с использованием следующих технологий:
+![Angular](https://icons8.com/icon/j9DnICNnlhGk/angularjs)
+![HTML](https://icons8.com/icon/v8RpPQUwv0N8/html-5)
+![CSS](https://icons8.com/icon/7gdY5qNXaKC0/css3)
+![TypeScript](https://icons8.com/icon/nCj4PvnCO0tZ/typescript)
+
