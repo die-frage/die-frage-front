@@ -18,7 +18,6 @@ export class SurveyPageComponent implements OnInit {
     dateBegin = "";
     dateEnd = "";
     maxParticipants = "";
-    isAnonymous = "";
     isFinished = false;
     isStarted = false;
 
@@ -44,7 +43,6 @@ export class SurveyPageComponent implements OnInit {
             this.dateBegin = this.getFormattedDate(this.survey.date_begin);
             this.dateEnd = this.getFormattedDate(this.survey.date_end);
             this.maxParticipants = this.survey.max_students.toString();
-            this.isAnonymous = this.survey.anonymous ? "Да" : "Нет";
             this.surveyTitle = this.survey.title;
             if (this.survey.status.name === "CREATED_STATUS") {
                 this.isStarted = false;

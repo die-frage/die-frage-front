@@ -18,7 +18,6 @@ export class EditSurveyPageComponent {
     startTime: string | undefined;
     endTime: string | undefined;
     maxParticipants: number;
-    isAnonymous: boolean;
     questions: Question[];
     indexQuestion: number;
 
@@ -32,7 +31,6 @@ export class EditSurveyPageComponent {
         console.log(this.survey);
         this.surveyName = this.survey.title;
         this.surveyDescription = this.survey.description;
-        this.isAnonymous = this.survey.anonymous;
         this.startTime = this.formatDate(new Date(this.survey.date_begin));
         this.endTime = this.formatDate(new Date(this.survey.date_end));
         this.surveyDescription = "";
@@ -132,14 +130,6 @@ export class EditSurveyPageComponent {
         }
     }
 
-    chooseAnonymous() {
-        this.isAnonymous = true;
-    }
-
-    chooseNotAnonymous() {
-        this.isAnonymous = false;
-    }
-
     toggleOptions(question: Question) {
         if (question.type_question === "NO_CHOICE") {
             question.type_question = "MULTIPLE";
@@ -157,7 +147,6 @@ export class EditSurveyPageComponent {
         const surveyData = {
             title: this.surveyName,
             description: this.surveyDescription,
-            anonymous: this.isAnonymous,
             date_begin: this.startTime,
             date_end: this.endTime,
             max_students: this.maxParticipants,

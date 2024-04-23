@@ -22,7 +22,6 @@ export class AddSurveyPageComponent {
     startTime: Date | undefined;
     endTime: Date | undefined;
     maxParticipants: number = 10;
-    isAnonymous: boolean = false;
     indexQuestion = 0;
     questions: Question[] = [new Question(this.indexQuestion++, "", "MULTIPLE", [], [], 1, 600)];
 
@@ -64,31 +63,30 @@ export class AddSurveyPageComponent {
             return;
         }
         if (this.startTime == undefined || this.endTime == undefined) {
-            this.step = 1;
-            return;
-        }
+            this.step = 0;
+            return;}
         if (this.startTime > this.endTime) {
             this.startTime = undefined;
             this.endTime = undefined;
-            this.step = 1;
+            this.step = 0;
             return;
         }
         if (new Date(this.startTime) < new Date()) {
             this.startTime = undefined;
             this.endTime = undefined;
-            this.step = 1;
+            this.step = 0;
             return;
         }
         if (this.surveyName == null || this.surveyName === "") {
-            this.step = 2;
+            this.step = 1;
             return;
         }
         if (this.surveyDescription == null || this.surveyDescription === "") {
-            this.step = 3;
+            this.step = 2;
             return;
         }
         if (this.maxParticipants == null || this.maxParticipants < 1 || this.maxParticipants > 50) {
-            this.step = 4;
+            this.step = 3;
             return;
         }
         this.step++;
@@ -127,7 +125,6 @@ export class AddSurveyPageComponent {
         const surveyData = {
             title: this.surveyName,
             description: this.surveyDescription,
-            anonymous: this.isAnonymous,
             date_begin: this.startTime,
             date_end: this.endTime,
             max_students: this.maxParticipants,
@@ -191,14 +188,6 @@ export class AddSurveyPageComponent {
 
     updateCorrectAnswer(value: string, questionIndex: number, correctAnswer: string) {
         this.questions[questionIndex].correct_answers[0] = value;
-    }
-
-    chooseAnonymous() {
-        this.isAnonymous = true;
-    }
-
-    chooseNotAnonymous() {
-        this.isAnonymous = false;
     }
 
     updatePoints(value: number, i: number, points: string) {
