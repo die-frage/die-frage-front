@@ -5,6 +5,12 @@
   height: 80vh;
 }
 
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .left-column, .right-column {
   flex: 1;
   margin: 50px 10px 0;
@@ -29,8 +35,7 @@
   flex-direction: column;
   margin-bottom: 50px;
   padding: 10px;
-  justify-content: center;
-  align-items: center;
+  align-items:flex-start;
 }
 
 .description{
@@ -40,15 +45,22 @@
 
 .sub-block {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
 }
 
-.img-row{
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  margin-left: 10px;
+.img-row-first {
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.img-row {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    margin-left: 10px;
 }
 
 .right-column label {
