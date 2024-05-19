@@ -14,6 +14,7 @@ export class RegisterPageComponent {
     registerForm: FormGroup;
     submitted = false;
     fromBackError = false;
+    nameError = false;
 
     constructor(private formBuilder: FormBuilder,
                 private authService: AuthService,
@@ -36,15 +37,6 @@ export class RegisterPageComponent {
     onSubmit() {
         this.submitted = true;
 
-        if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
-            this.registerForm.controls['confirmPassword'].setErrors({'passwordMismatch': true});
-            return;
-        }
-
-        if (this.registerForm.invalid) {
-            return;
-        }
-
         const fullName: string = this.registerForm.get('fullname')?.value;
         const fio: string[] = fullName.split(' ');
         let lastName: string | null = ' ';
@@ -61,6 +53,37 @@ export class RegisterPageComponent {
             patronymic = fio[2];
         }
 
+        if (!this.isValidName(lastName)) {
+            this.nameError = true;
+        }
+
+        if (!this.isValidName(firstName)) {
+            this.nameError = true;
+        }
+
+        if (!this.isValidName(patronymic)) {
+            this.nameError = true;
+        }
+
+        if (this.nameError){
+            return;
+        }
+
+        let email: string = this.registerForm.get('email')?.value;
+        if (!email.includes(".") || !email.includes("@")){
+            this.registerForm.controls['email'].setErrors({'emailFormat': true});
+            return;
+        }
+
+        if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+            this.registerForm.controls['confirmPassword'].setErrors({'passwordMismatch': true});
+            return;
+        }
+
+        if (this.registerForm.invalid) {
+            return;
+        }
+
         const signUpInfo = new SignUpInfo(
             this.registerForm.get('email')?.value,
             this.registerForm.get('password')?.value,
@@ -73,7 +96,7 @@ export class RegisterPageComponent {
             data => {
                 this.tokenStorage.saveToken(data.token);
                 this.tokenStorage.saveEmail(signUpInfo.email);
-                this.router.navigate(['']);
+                this.router.navigate(['/sign-in']);
             },
             error => {
                 if (error.status === 409) {
@@ -86,5 +109,17 @@ export class RegisterPageComponent {
 
     onEmailInputClicked() {
         this.fromBackError = false;
+    }
+
+    onFIOInputClicked() {
+        this.nameError = false;
+    }
+
+    private isValidName(name: string | null): boolean {
+        if (name === null) {
+            return false;
+        }
+        const regex = /^[a-zA-Zа-яА-ЯёЁ\s]*$/;
+        return regex.test(name);
     }
 }
