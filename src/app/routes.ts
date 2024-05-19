@@ -21,7 +21,7 @@ const routeConfig: Routes = [
         title: 'Die Frage'
     },
     {
-        path: 'user-page',
+        path: 'user',
         component: UserPageComponent,
         canActivate: [authGuard],
         title: 'Die Frage'

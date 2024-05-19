@@ -7,8 +7,34 @@
   <link rel="stylesheet" href="app.component.css">
 </head>
 <body>
-  <app-header-authorised></app-header-authorised>
+    <app-header-authorised *ngIf="authService.isAuthenticated()"></app-header-authorised>
+    <app-header-unauthorised *ngIf="!authService.isAuthenticated()"></app-header-unauthorised>
   <router-outlet></router-outlet>
 </body>
 </html>
 
+
+<!--
+У меня есть страницы где может быть до авторизации и после авторизации пользователь, если пользователь авторизован,
+тогда должен выводится: app-header-authorised
+иначе: app-header-unauthorised
+!!!!КАК ЭТО СДЕЛАТЬ!!!!
+
+ЕЩЕ Есть такая штука, может к ней как то прицепиться?
+@Injectable({
+    providedIn: 'root'
+})
+export class authGuard implements CanActivate {
+
+    constructor(private router: Router, private tokenStorageService: TokenStorageService) {
+    }
+
+    canActivate(): boolean {
+        if (this.tokenStorageService.getToken()) {
+            return true;
+        } else {
+            this.router.navigate(['/sign-in']);
+            return false;
+        }
+    }
+}-->

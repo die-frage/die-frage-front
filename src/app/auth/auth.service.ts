@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { SignInInfo } from "./responces/SignInInfo";
 import { SignUpInfo } from "./responces/SignUpInfo";
 import { JwtResponse } from "./responces/JwtResponse";
+import {TokenStorageService} from "./token-storage.service";
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -25,6 +26,11 @@ export class AuthService {
         return this.http.post<JwtResponse>(this.signUpUrl, userData, httpOptions);
     }
 
-    constructor(private http: HttpClient) {
+    isAuthenticated(): boolean {
+        return !!this.tokenStorageService.getToken();
+    }
+
+    constructor(private http: HttpClient,
+                private tokenStorageService: TokenStorageService) {
     }
 }

@@ -12,7 +12,7 @@ export class HeaderAuthorisedComponent {
     }
 
     toUserPage() {
-        this.router.navigate(['/user-page']);
+        this.router.navigate(['/user']);
     }
 
     toHomePage() {
