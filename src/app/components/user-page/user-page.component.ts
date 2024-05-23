@@ -5,6 +5,7 @@ import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../auth/auth.service";
+import {SignUpInfo} from "../../auth/responces/SignUpInfo";
 
 @Component({
     selector: 'app-user-page',
@@ -16,6 +17,8 @@ export class UserPageComponent {
     user: User | undefined;
     updateForm: FormGroup;
     fromBackError: boolean = false;
+    nameError = false;
+    successUpdated = false;
 
     constructor(private token: TokenStorageService,
                 private formBuilder: FormBuilder,
@@ -64,7 +67,46 @@ export class UserPageComponent {
     }
 
     onSubmit() {
+        this.successUpdated = false;
         if (this.user == undefined) return;
+
+        const fullName: string = this.updateForm.get('fullname')?.value;
+        const fio: string[] = fullName.split(' ');
+        let lastName: string | null = ' ';
+        let firstName: string | null = ' ';
+        let patronymic: string | null = ' ';
+
+        if (fio.length > 0 && fio[0] !== null) {
+            lastName = fio[0];
+        }
+        if (fio.length > 1 && fio[1] !== null) {
+            firstName = fio[1];
+        }
+        if (fio.length > 2 && fio[2] !== null) {
+            patronymic = fio[2];
+        }
+
+        if (!this.isValidName(lastName)) {
+            this.nameError = true;
+        }
+
+        if (!this.isValidName(firstName)) {
+            this.nameError = true;
+        }
+
+        if (!this.isValidName(patronymic)) {
+            this.nameError = true;
+        }
+
+        if (this.nameError){
+            return;
+        }
+
+        let email: string = this.updateForm.get('email')?.value;
+        if (!email.includes(".") || !email.includes("@")){
+            this.updateForm.controls['email'].setErrors({'emailFormat': true});
+            return;
+        }
 
         if (this.updateForm.value.password !== this.updateForm.value.confirmPassword) {
             this.updateForm.controls['confirmPassword'].setErrors({'passwordMismatch': true});
@@ -75,29 +117,14 @@ export class UserPageComponent {
             return;
         }
 
-        const fullName: string = this.updateForm.get('fullname')?.value;
-        const fio: string[] = fullName.split(' ');
-        let lastName: string | null = ' ';
-        let firstName: string | null = ' ';
-        let patronomic: string | null = ' ';
+        const data = new SignUpInfo(
+            this.updateForm.get('email')?.value,
+            this.updateForm.get('password')?.value,
+            lastName,
+            firstName,
+            patronymic,
+        );
 
-        if (fio.length > 0 && fio[0] !== null) {
-            lastName = fio[0];
-        }
-        if (fio.length > 1 && fio[1] !== null) {
-            firstName = fio[1];
-        }
-        if (fio.length > 2 && fio[2] !== null) {
-            patronomic = fio[2];
-        }
-
-        const data = {
-            firstName: firstName,
-            lastName: lastName,
-            patronymic: patronomic,
-            email: this.updateForm.get('email')?.value,
-            password: this.updateForm.get('password')?.value,
-        }
 
         this.userService.updateProfessor(this.user.id, data).subscribe(
             (updatedUser: User) => {
@@ -117,7 +144,7 @@ export class UserPageComponent {
                         // В случае успешной аутентификации сохраняем токен и email, затем перенаправляем на нужный маршрут
                         this.tokenStorage.saveToken(authData.token);
                         this.tokenStorage.saveEmail(signInInfo.email);
-                        this.router.navigate(['']);
+                        this.successUpdated = true;
                     },
                     (authError: any) => {
                         // Обработка ошибок аутентификации
@@ -128,7 +155,6 @@ export class UserPageComponent {
                 );
             },
             (updateError: any) => {
-                console.log(updateError);
                 if (updateError.status === 409) {
                     this.fromBackError = true;
                 }
@@ -139,5 +165,19 @@ export class UserPageComponent {
 
     onEmailInputClicked() {
         this.fromBackError = false;
+        this.successUpdated = false;
+    }
+
+    onFIOInputClicked() {
+        this.nameError = false;
+        this.successUpdated = false;
+    }
+
+    private isValidName(name: string | null): boolean {
+        if (name === null) {
+            return false;
+        }
+        const regex = /^[a-zA-Zа-яА-ЯёЁ\s]*$/;
+        return regex.test(name);
     }
 }

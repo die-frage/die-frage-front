@@ -62,3 +62,9 @@ input[type="password"] {
   font-size: 14px;
   margin-top: 5px;
 }
+
+.success-message {
+    color: #6CC870;
+    font-size: 14px;
+    margin-top: 5px;
+}
