@@ -24,7 +24,7 @@
         <div *ngIf="formControls['fullname'].errors?.['required']" class="error-message">ФИО не может быть пустым</div>
     </div>
 
-    <div *ngIf="nameError" class="error-message">ФИО может содежрать только латиницу или кириллицу</div>
+    <div *ngIf="nameError" class="error-message">ФИО может содержать только латиницу или кириллицу</div>
 
     <div *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)">
         <div *ngIf="formControls['email'].errors?.['required']" class="error-message">Почта не может быть пустой</div>
