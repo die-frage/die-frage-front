@@ -111,3 +111,11 @@
 .item:hover {
   background-color: #e0e0e0;;
 }
+
+.green-background {
+    background-color: #78e07d;
+}
+
+.grey-background {
+    background-color: #A1A1A1A0
+}
