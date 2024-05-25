@@ -17,11 +17,13 @@ export class AddSurveyPageComponent {
     user: User | undefined;
     fromBackError = false;
 
-    surveyName: string = 'new survey';
-    surveyDescription: string = 'description new survey';
+    isRegularSurvey: boolean | undefined;
+    isInteractiveSurvey: boolean | undefined;
+    surveyName: string = '';
+    surveyDescription: string = '';
     startTime: Date | undefined;
     endTime: Date | undefined;
-    maxParticipants: number = 10;
+    maxParticipants: number = 0;
     indexQuestion = 0;
     questions: Question[] = [new Question(this.indexQuestion++, "", "MULTIPLE", [], [], 1, 600)];
 
@@ -62,18 +64,11 @@ export class AddSurveyPageComponent {
             this.step = 0;
             return;
         }
-        if (this.startTime == undefined || this.endTime == undefined) {
-            this.step = 0;
-            return;}
-        if (this.startTime > this.endTime) {
-            this.startTime = undefined;
-            this.endTime = undefined;
-            this.step = 0;
-            return;
-        }
-        if (new Date(this.startTime) < new Date()) {
-            this.startTime = undefined;
-            this.endTime = undefined;
+
+        if ((this.isRegularSurvey == undefined &&
+            this.isInteractiveSurvey == undefined) ||
+            (this.isRegularSurvey == false &&
+            this.isInteractiveSurvey == false)){
             this.step = 0;
             return;
         }
@@ -87,6 +82,22 @@ export class AddSurveyPageComponent {
         }
         if (this.maxParticipants == null || this.maxParticipants < 1 || this.maxParticipants > 50) {
             this.step = 3;
+            return;
+        }
+        if (this.startTime == undefined || this.endTime == undefined) {
+            this.step = 4;
+            return;
+        }
+        if (this.startTime > this.endTime) {
+            this.startTime = undefined;
+            this.endTime = undefined;
+            this.step = 4;
+            return;
+        }
+        if (new Date(this.startTime) < new Date()) {
+            this.startTime = undefined;
+            this.endTime = undefined;
+            this.step = 4;
             return;
         }
         this.step++;
@@ -252,5 +263,17 @@ export class AddSurveyPageComponent {
                 this.fromBackError = false;
             }
         });
+    }
+
+    RegularSurvey() {
+        this.isRegularSurvey = true;
+        this.isInteractiveSurvey = false;
+        this.nextStep();
+    }
+
+    InteractiveSurvey() {
+        this.isInteractiveSurvey = true;
+        this.isRegularSurvey = false;
+        this.nextStep();
     }
 }

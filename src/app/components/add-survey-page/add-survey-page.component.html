@@ -1,7 +1,6 @@
 <div class="container">
-    <h1 *ngIf="step > 3" >{{ surveyName }}</h1>
+    <h1 *ngIf="step > 1" >{{ surveyName }}</h1>
     <form *ngIf="step === -1">
-        <label class="bold-label" style="margin-bottom: 20px;">Как создать опрос?</label>
         <div class="wrap-horizontal">
             <div class="anonym-div">
                 <button type="button" (click)="nextStep()">Использовать конструктор</button>
@@ -22,10 +21,9 @@
         </div>
     </form>
     <form *ngIf="step === 0" (ngSubmit)="nextStep()">
-        <label for="startTime">Время начала опроса:</label>
-        <input type="datetime-local" id="startTime" name="startTime" [(ngModel)]="startTime" required [min]="minStartTime">
-        <label for="endTime">Время окончания опроса:</label>
-        <input type="datetime-local" id="endTime" name="endTime" [(ngModel)]="endTime" required [min]="minEndTime">
+        <label class="bold-label">Вид опроса:</label>
+        <button type="button" (click)="RegularSurvey()">Обычный опрос</button>
+        <button type="button" (click)="InteractiveSurvey()">Интерактивный опрос</button>
     </form>
     <form *ngIf="step === 1" (ngSubmit)="nextStep()">
         <label class="bold-label" for="surveyName">Название опроса:</label>
@@ -39,7 +37,13 @@
         <label class="bold-label" for="maxParticipants">Максимальное число участников:</label>
         <input type="number" id="maxParticipants" name="maxParticipants" [(ngModel)]="maxParticipants" required [max]="50">
     </form>
-    <form *ngIf="step === 4" (ngSubmit)="createSurvey()">
+    <form *ngIf="step === 4" (ngSubmit)="nextStep()">
+        <label for="startTime">Время начала опроса:</label>
+        <input type="datetime-local" id="startTime" name="startTime" [(ngModel)]="startTime" required [min]="minStartTime">
+        <label for="endTime">Время окончания опроса:</label>
+        <input type="datetime-local" id="endTime" name="endTime" [(ngModel)]="endTime" required [min]="minEndTime">
+    </form>
+    <form *ngIf="step === 5" (ngSubmit)="createSurvey()">
         <div class="wrap-question" *ngFor="let question of questions; let i = index">
             <label class="bold-label">Вопрос {{ i + 1 }}:</label>
             <input placeholder="Вопрос № {{i+1}}" type="text" [ngModel]="question.question" (blur)="updateQuestion($any($event.target).value, i, 'question')" name="question_{{i}}" required >
@@ -68,7 +72,6 @@
             </div>
             <p class="question-manager" (click)="deleteQuestion(i)">Удалить</p>
         </div>
-
         <p (click)="addNewQuestion()" class="question-manager">Добавить вопрос</p>
     </form>
 </div>
