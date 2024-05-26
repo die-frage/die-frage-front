@@ -34,4 +34,15 @@
         </div>
     </div>
 
+    <div *ngIf="survey && isStarted && !isFinished && isInteractive" class="block-timer">
+        <p style="font-size: 20px"> {{currentQuestionId}}. {{currentQuestion}}</p>
+        <div>
+            <div class="timer-text">Осталось: {{ remainingTime }} сек.</div>
+            <div class="timer-bar">
+                <div class="timer-bar-fill" [style.width.%]="(remainingTime / initialTime) * 100"></div>
+            </div>
+        </div>
+        <button type="submit" (click)="startTimer()">Следующий вопрос</button>
+    </div>
+
 </div>

@@ -28,7 +28,6 @@ export class EditSurveyPageComponent {
                 private router: Router) {
 
         this.survey = history.state.survey;
-        console.log(this.survey);
         this.surveyName = this.survey.title;
         this.surveyDescription = this.survey.description;
         this.startTime = this.formatDate(new Date(this.survey.date_begin));
@@ -37,7 +36,6 @@ export class EditSurveyPageComponent {
         this.maxParticipants = this.survey.max_students;
         this.questions = this.survey.questions;
         this.indexQuestion = this.survey.questions.length - 1;
-
     }
 
     info: any;
@@ -160,7 +158,6 @@ export class EditSurveyPageComponent {
             console.error('Error updating survey:', error);
         });
     }
-
 
     addNewQuestion() {
         this.questions.push(new Question(this.indexQuestion++, "", "MULTIPLE", [], [], 1, 600))

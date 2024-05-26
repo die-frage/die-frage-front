@@ -25,10 +25,21 @@ export class SurveyPageComponent implements OnInit {
     survey: Survey | undefined;
     user: User | undefined;
 
+    currentQuestionId: number = 0;
+    currentQuestion: string  = "";
+    initialTime: number = 30;
+    remainingTime: number = this.initialTime;
+    private intervalId: any;
+    isInteractive: boolean = false;
+
     constructor(private token: TokenStorageService,
                 private userService: UserService,
                 private surveyService: SurveyService,
                 private router: Router) {
+    }
+
+    ngOnDestroy(): void {
+        this.clearTimer();
     }
 
     async ngOnInit() {
@@ -177,5 +188,27 @@ export class SurveyPageComponent implements OnInit {
             .catch(error => {
                 console.error('Error downloading file:', error);
             });
+    }
+
+    startTimer(): void {
+        this.clearTimer();
+        this.currentQuestionId = 1;
+        this.currentQuestion = "Кто победил золотую орду?"
+
+        this.remainingTime = this.initialTime;
+        this.intervalId = setInterval(() => {
+            if (this.remainingTime > 0) {
+                this.remainingTime--;
+            } else {
+                this.clearTimer();
+            }
+        }, 1000);
+    }
+
+    clearTimer(): void {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
     }
 }
