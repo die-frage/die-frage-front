@@ -25,7 +25,7 @@ export class SurveyPageComponent implements OnInit {
     survey: Survey | undefined;
     user: User | undefined;
 
-    currentQuestionId: number = 0;
+    currentQuestionId: number = -1;
     currentQuestion: string  = "";
     initialTime: number = 30;
     remainingTime: number = this.initialTime;
@@ -55,6 +55,7 @@ export class SurveyPageComponent implements OnInit {
             this.dateEnd = this.getFormattedDate(this.survey.date_end);
             this.maxParticipants = this.survey.max_students.toString();
             this.surveyTitle = this.survey.title;
+            this.isInteractive = this.survey.is_interactive;
             if (this.survey.status.name === "CREATED_STATUS") {
                 this.isStarted = false;
                 this.isFinished = false;
@@ -190,10 +191,30 @@ export class SurveyPageComponent implements OnInit {
             });
     }
 
+    nextQuestion(){
+        if (this.user && this.survey)
+            this.surveyService.nextQuestion(this.user.id, this.survey.id, this.currentQuestionId + 1).subscribe(
+                (response) => {
+                    if (response == null) {
+                        this.currentQuestionId = -1;
+                        this.currentQuestion = "";
+                        this.stopSurvey();
+                        return;
+                    }
+                    this.currentQuestionId = response.question_id;
+                    this.currentQuestion = response.question;
+                },
+                (error) => {
+                    console.error('Error getting question:', error);
+                }
+            );
+    }
+
     startTimer(): void {
         this.clearTimer();
-        this.currentQuestionId = 1;
-        this.currentQuestion = "Кто победил золотую орду?"
+        this.nextQuestion();
+        // this.currentQuestionId = 1;
+        // this.currentQuestion = "Кто победил золотую орду?"
 
         this.remainingTime = this.initialTime;
         this.intervalId = setInterval(() => {

@@ -35,7 +35,7 @@
     </div>
 
     <div *ngIf="survey && isStarted && !isFinished && isInteractive" class="block-timer">
-        <p style="font-size: 20px"> {{currentQuestionId}}. {{currentQuestion}}</p>
+        <p *ngIf="currentQuestionId!=-1" style="font-size: 20px"> {{currentQuestionId}}. {{currentQuestion}}</p>
         <div>
             <div class="timer-text">Осталось: {{ remainingTime }} сек.</div>
             <div class="timer-bar">

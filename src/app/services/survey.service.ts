@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Survey} from "../entities/survey";
 import {Observable} from "rxjs";
+import {Question} from "../entities/question";
 
 const httpOptions = {
     headers: new HttpHeaders({'Accept': 'application/json'})
@@ -45,5 +46,9 @@ export class SurveyService {
         const formData: FormData = new FormData();
         formData.append('file', file, file.name);
         return this.http.post<Survey>(`${this.baseUrl}/${professorId}/add/excel`, formData);
+    }
+
+    nextQuestion(professorId: number, surveyId: number, quetionId: number): Observable<Question> {
+        return this.http.get<Question>(`${this.baseUrl}/next/question/${professorId}/${surveyId}/${quetionId}`, httpOptions);
     }
 }
