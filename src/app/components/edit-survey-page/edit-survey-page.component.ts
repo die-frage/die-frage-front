@@ -226,7 +226,7 @@ export class EditSurveyPageComponent {
 
     updateTimeLimit(value: number, i: number, timeLimit: string) {
         if (timeLimit === 'time_limit') {
-            this.questions[i].time_limit = value;
+            this.questions[i].time_limit_sec = value;
         }
     }
 

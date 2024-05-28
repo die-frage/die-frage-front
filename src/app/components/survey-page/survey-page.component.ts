@@ -27,10 +27,11 @@ export class SurveyPageComponent implements OnInit {
 
     currentQuestionId: number = -1;
     currentQuestion: string  = "";
-    initialTime: number = 30;
+    initialTime: number = 0;
     remainingTime: number = this.initialTime;
     private intervalId: any;
     isInteractive: boolean = false;
+    countQuestions: number = 0;
 
     constructor(private token: TokenStorageService,
                 private userService: UserService,
@@ -56,6 +57,7 @@ export class SurveyPageComponent implements OnInit {
             this.maxParticipants = this.survey.max_students.toString();
             this.surveyTitle = this.survey.title;
             this.isInteractive = this.survey.is_interactive;
+            this.countQuestions = this.survey.questions.length;
             if (this.survey.status.name === "CREATED_STATUS") {
                 this.isStarted = false;
                 this.isFinished = false;
@@ -195,14 +197,18 @@ export class SurveyPageComponent implements OnInit {
         if (this.user && this.survey)
             this.surveyService.nextQuestion(this.user.id, this.survey.id, this.currentQuestionId + 1).subscribe(
                 (response) => {
+                    console.log(response)
                     if (response == null) {
                         this.currentQuestionId = -1;
                         this.currentQuestion = "";
                         this.stopSurvey();
                         return;
                     }
+                    this.clearTimer();
+                    this.initialTime = response.time_limit_sec;
                     this.currentQuestionId = response.question_id;
                     this.currentQuestion = response.question;
+                    this.startTimer();
                 },
                 (error) => {
                     console.error('Error getting question:', error);
@@ -211,9 +217,6 @@ export class SurveyPageComponent implements OnInit {
     }
 
     startTimer(): void {
-        this.clearTimer();
-        this.nextQuestion();
-
         this.remainingTime = this.initialTime;
         this.intervalId = setInterval(() => {
             if (this.remainingTime > 0) {

@@ -60,7 +60,7 @@
             <label *ngIf="question.type_question === 'MULTIPLE'" class="bold-label">Баллы за правильный ответ:</label>
             <input *ngIf="question.type_question === 'MULTIPLE'" placeholder="Баллы за правильный ответ" type="number" [ngModel]="question.points" (blur)="updatePoints($any($event.target).value, i, 'points')" name="points_{{i}}" required>
             <label class="bold-label">Время на ответ (секунды):</label>
-            <input placeholder="Время на ответ (секунды)" type="number" [ngModel]="question.time_limit" (blur)="updateTimeLimit($any($event.target).value, i, 'time_limit')" name="time_limit_{{i}}" required>
+            <input placeholder="Время на ответ (секунды)" type="number" [ngModel]="question.time_limit_sec" (blur)="updateTimeLimit($any($event.target).value, i, 'time_limit_sec')" name="time_limit_sec{{i}}" required>
             <div *ngIf="question.type_question === 'MULTIPLE' ">
                 <label class="bold-label">Варианты ответов:</label>
                 <input placeholder="Правильный ответ" type="text" [ngModel]="question.correct_answers[0]" (blur)="updateCorrectAnswer($any($event.target).value, i, 'correct_answer')" name="correct_answer_{{i}}" required>
