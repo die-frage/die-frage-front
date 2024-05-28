@@ -213,8 +213,6 @@ export class SurveyPageComponent implements OnInit {
     startTimer(): void {
         this.clearTimer();
         this.nextQuestion();
-        // this.currentQuestionId = 1;
-        // this.currentQuestion = "Кто победил золотую орду?"
 
         this.remainingTime = this.initialTime;
         this.intervalId = setInterval(() => {
