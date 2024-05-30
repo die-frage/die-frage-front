@@ -12,7 +12,7 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class SurveyService {
-    private baseUrl = 'http://localhost:8787/api/survey';
+    baseUrl = 'http://localhost:8787/api/survey';
 
     constructor(private http: HttpClient) {
 

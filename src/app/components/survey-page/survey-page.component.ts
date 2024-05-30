@@ -180,7 +180,7 @@ export class SurveyPageComponent implements OnInit {
         this.downloadFile(fileName);
     }
 
-    private downloadFile(fileName: string): void {
+    downloadFile(fileName: string): void {
         fetch(fileName)
             .then(response => response.blob())
             .then(blob => {

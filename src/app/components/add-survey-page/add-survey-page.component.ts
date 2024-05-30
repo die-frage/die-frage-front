@@ -35,8 +35,8 @@ export class AddSurveyPageComponent {
 
     constructor(private token: TokenStorageService,
                 private userService: UserService,
-                private surveyService: SurveyService,
-                private router: Router) {
+                public surveyService: SurveyService,
+                public router: Router) {
     }
 
     async ngOnInit() {

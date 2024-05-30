@@ -125,7 +125,6 @@ export class UserPageComponent {
             patronymic,
         );
 
-
         this.userService.updateProfessor(this.user.id, data).subscribe(
             (updatedUser: User) => {
                 // Обновление объекта пользователя данными из ответа сервера
@@ -139,20 +138,23 @@ export class UserPageComponent {
                 };
 
                 // Вызов метода authService.signUp для проведения аутентификации
-                this.authService.signIn(signInInfo).subscribe(
-                    (authData: any) => {
-                        // В случае успешной аутентификации сохраняем токен и email, затем перенаправляем на нужный маршрут
-                        this.tokenStorage.saveToken(authData.token);
-                        this.tokenStorage.saveEmail(signInInfo.email);
-                        this.successUpdated = true;
-                    },
-                    (authError: any) => {
-                        // Обработка ошибок аутентификации
-                        if (authError.status === 409) {
-                            this.fromBackError = true;
+                const signInObservable = this.authService.signIn(signInInfo);
+                if (signInObservable){
+                    signInObservable.subscribe(
+                        (authData: any) => {
+                            // В случае успешной аутентификации сохраняем токен и email, затем перенаправляем на нужный маршрут
+                            this.tokenStorage.saveToken(authData.token);
+                            this.tokenStorage.saveEmail(signInInfo.email);
+                            this.successUpdated = true;
+                        },
+                        (authError: any) => {
+                            // Обработка ошибок аутентификации
+                            if (authError.status === 409) {
+                                this.fromBackError = true;
+                            }
                         }
-                    }
-                );
+                    );
+                }
             },
             (updateError: any) => {
                 if (updateError.status === 409) {
