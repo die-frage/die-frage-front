@@ -79,7 +79,7 @@
 <div class="wrap-btn">
     <button type="button" *ngIf="step !== 0" (click)="previousStep()">Назад</button>
     <button type="button" *ngIf="step === 0" (click)="cancel()">Отменить</button>
-    <button type="submit" *ngIf="step !== 4" (click)="nextStep()">Дальше</button>
-    <button type="submit" *ngIf="step === 4" (click)="createSurvey()">Создать опрос</button>
+    <button type="submit" *ngIf="step !== 5" (click)="nextStep()">Дальше</button>
+    <button type="submit" *ngIf="step === 5" (click)="createSurvey()">Создать опрос</button>
 </div>
 

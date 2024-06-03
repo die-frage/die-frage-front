@@ -139,6 +139,7 @@ export class AddSurveyPageComponent {
             date_begin: this.startTime,
             date_end: this.endTime,
             max_students: this.maxParticipants,
+            is_interactive: this.isInteractiveSurvey,
             questions: this.questions
         };
         if (!this.user) return;
